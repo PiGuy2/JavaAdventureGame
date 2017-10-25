@@ -1,7 +1,7 @@
 package main;
 
 import objects.BackgroundItem;
-import objects.InteractableItem;
+import objects.InteractiveItem;
 import objects.Item;
 
 /**
@@ -13,12 +13,12 @@ public class Main {
 		BackgroundItem tree = new BackgroundItem("tree", "average sized jewel encrusted");
 		BackgroundItem log = new BackgroundItem("log", "very large");
 		BackgroundItem stick = new BackgroundItem("stick", "small");
-		InteractableItem egg = new InteractableItem("egg", "jeweled");
-		InteractableItem sack = new InteractableItem("sack", "brown paper");
+		InteractiveItem egg = new InteractiveItem("egg", "jeweled");
+		InteractiveItem sack = new InteractiveItem("sack", "brown paper");
 		System.out.println("Background items:");
 		BackgroundItem.printAll();
 		System.out.println("\nInteractable items:");
-		InteractableItem.printAll();
+		InteractiveItem.printAll();
 		System.out.println("\nAll items:");
 		Item.printAll();
 	}

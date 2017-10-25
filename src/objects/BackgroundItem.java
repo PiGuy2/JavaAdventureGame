@@ -10,7 +10,7 @@ public class BackgroundItem extends Item {
 	public static ArrayList<BackgroundItem> backgroundItems = new ArrayList<BackgroundItem>();
 
 	/**
-	 * Create a new item object
+	 * Create a new background item object
 	 * 
 	 * @param name
 	 *            The name of the item
@@ -23,6 +23,10 @@ public class BackgroundItem extends Item {
 		backgroundItems.add(this);
 	}
 
+	/**
+	 * Prints all {@link BackgroundItem#BackgroundItem(String, String) Background
+	 * Items}
+	 */
 	public static void printAll () {
 		for (BackgroundItem i : backgroundItems) {
 			System.out.println("A " + i.getDescription() + " " + i.getName() + ".");

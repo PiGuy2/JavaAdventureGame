@@ -2,6 +2,8 @@ package objects;
 
 import java.util.ArrayList;
 
+import main.UserInput;
+
 /**
  * @author Robby
  *
@@ -9,11 +11,33 @@ import java.util.ArrayList;
 public class Room {
 	private ArrayList<Item> itemsInArea;
 
+	/**
+	 * Creates a {@code Room} object to store a list of
+	 * {@link Item#Item(String, String, boolean) items} and
+	 * {@link character.NPC#NPC() NPCs} in the room
+	 */
 	public Room () {
 		itemsInArea = new ArrayList<>();
 	}
 
+	// TODO documentation
 	public Item getItem (String param) {
+		ArrayList<Item> matches = getItemsFromList(itemsInArea, param);
+		if (matches.size() == 1) {
+			return matches.get(0);
+		} else if (matches.size() > 1) {
+			System.out.println("Which Item are you talking about?");
+			for (Item i : matches) {
+				System.out.println(i.getName());
+			}
+			String specific = UserInput.get("What item would you like (Press enter to cancel)");
+		} else {
+			// TODO no matches
+		}
+		return null;
+	}
+
+	private ArrayList<Item> getItemsFromList (ArrayList<Item> items, String param) {
 		ArrayList<Item> matches = new ArrayList<>();
 		for (int run = 0; run < 2; run++) {
 			for (Item i : itemsInArea) {
@@ -30,13 +54,10 @@ public class Room {
 					}
 				}
 			}
-			if (matches.size() == 1) {
-				return matches.get(0);
-			} else if (matches.size() > 1) {
-				// TODO too many items
+			if (matches.size() > 0) {
+				return matches;
 			}
 		}
-		// TODO no matches
-		return null;
+		return new ArrayList<>();
 	}
 }

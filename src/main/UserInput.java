@@ -24,8 +24,8 @@ public class UserInput {
 	 * user input
 	 * 
 	 * @param prompt
-	 *            is printed before user input is read @return String read from
-	 *            {@code System.in} using {@code Scanner.nextLine()} @throws
+	 *            is printed before user input is read
+	 * @return String read from {@code System.in} using {@code Scanner.nextLine()}
 	 * @throws NoSuchElementException
 	 *             if no line was found
 	 */
@@ -35,7 +35,8 @@ public class UserInput {
 	}
 
 	/**
-	 * Similar to {@link #getString(String)}, but includes error catching
+	 * Similar to {@link #getString(String)}, but includes error catching. This adds
+	 * {@code ": "} to the end of {@code prompt}
 	 * 
 	 * @param prompt
 	 *            is printed before user input is read

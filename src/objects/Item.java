@@ -7,12 +7,12 @@ import java.util.ArrayList;
  * 
  */
 public class Item {
-	protected String name;
+	private static ArrayList<Item> items = new ArrayList<Item>();
 	protected String description;
 
 	protected boolean isBackground;
 
-	private static ArrayList<Item> items = new ArrayList<Item>();
+	protected String name;
 
 	/**
 	 * Create a new item object
@@ -32,6 +32,9 @@ public class Item {
 		items.add(this);
 	}
 
+	/**
+	 * Prints all {@link Item#Item(String, String, boolean) Items}
+	 */
 	public static void printAll () {
 		for (Item i : items) {
 			String type = (i.getBackground()) ? "interactable" : "background";
@@ -39,23 +42,25 @@ public class Item {
 		}
 	}
 
-	public String getName () {
-		return name;
-	}
+	// TODO getter and setter docs?
 
-	public void setName (String name) {
-		this.name = name;
+	public boolean getBackground () {
+		return isBackground;
 	}
 
 	public String getDescription () {
 		return description;
 	}
 
+	public String getName () {
+		return name;
+	}
+
 	public void setDescription (String description) {
 		this.description = description;
 	}
 
-	public boolean getBackground () {
-		return isBackground;
+	public void setName (String name) {
+		this.name = name;
 	}
 }

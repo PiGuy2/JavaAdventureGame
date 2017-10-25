@@ -7,12 +7,12 @@ import java.util.HashMap;
  * @author Robby
  * 
  */
-public class InteractableItem extends Item {
-	private static ArrayList<InteractableItem> interactableItems = new ArrayList<InteractableItem>();
+public class InteractiveItem extends Item {
+	private static ArrayList<InteractiveItem> interactiveItems = new ArrayList<InteractiveItem>();
 	private HashMap<String, String> commands;
 
 	/**
-	 * Create a new item object
+	 * Create a new interactive item object
 	 * 
 	 * @param name
 	 *            The name of the item
@@ -20,14 +20,18 @@ public class InteractableItem extends Item {
 	 *            The description of the object. This is printed when {@code look}
 	 *            is run.
 	 */
-	public InteractableItem (String name, String description) {
+	public InteractiveItem (String name, String description) {
 		super(name, description, true);
 		commands = new HashMap<>();
-		interactableItems.add(this);
+		interactiveItems.add(this);
 	}
 
+	/**
+	 * Prints all {@link InteractiveItem#InteractiveItem(String, String) Interactive
+	 * Items}
+	 */
 	public static void printAll () {
-		for (InteractableItem i : interactableItems) {
+		for (InteractiveItem i : interactiveItems) {
 			System.out.println("A " + i.getDescription() + " " + i.getName() + ".");
 		}
 	}
