@@ -1,12 +1,15 @@
 package objects;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author Robby
+ * 
  */
 public class InteractableItem extends Item {
 	private static ArrayList<InteractableItem> interactableItems = new ArrayList<InteractableItem>();
+	private HashMap<String, String> commands;
 
 	/**
 	 * Create a new item object
@@ -19,6 +22,7 @@ public class InteractableItem extends Item {
 	 */
 	public InteractableItem (String name, String description) {
 		super(name, description, true);
+		commands = new HashMap<>();
 		interactableItems.add(this);
 	}
 

@@ -1,17 +1,16 @@
 package objects;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * @author Robby
+ * 
  */
 public class Item {
 	protected String name;
 	protected String description;
 
 	protected boolean isBackground;
-	public HashMap<String, String> commands;
 
 	private static ArrayList<Item> items = new ArrayList<Item>();
 
@@ -30,7 +29,6 @@ public class Item {
 		this.name = name;
 		this.description = description;
 		this.isBackground = isBackground;
-		commands = new HashMap<String, String>();
 		items.add(this);
 	}
 

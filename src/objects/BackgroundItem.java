@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * @author Robby
+ * 
  */
 public class BackgroundItem extends Item {
 	public static ArrayList<BackgroundItem> backgroundItems = new ArrayList<BackgroundItem>();

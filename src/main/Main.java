@@ -4,6 +4,10 @@ import objects.BackgroundItem;
 import objects.InteractableItem;
 import objects.Item;
 
+/**
+ * @author Robby
+ *
+ */
 public class Main {
 	public static void main (String [] args) {
 		BackgroundItem tree = new BackgroundItem("tree", "average sized jewel encrusted");
