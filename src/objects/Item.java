@@ -1,13 +1,10 @@
 package objects;
 
-import java.util.ArrayList;
-
 /**
  * @author Robby
  * 
  */
 public class Item {
-	private static ArrayList<Item> items = new ArrayList<Item>();
 	protected String description;
 
 	protected boolean isBackground;
@@ -29,17 +26,6 @@ public class Item {
 		this.name = name;
 		this.description = description;
 		this.isBackground = isBackground;
-		items.add(this);
-	}
-
-	/**
-	 * Prints all {@link Item#Item(String, String, boolean) Items}
-	 */
-	public static void printAll () {
-		for (Item i : items) {
-			String type = (i.getBackground()) ? "interactable" : "background";
-			System.out.println("A " + type + " " + i.getDescription() + " " + i.getName() + ".");
-		}
 	}
 
 	// TODO getter and setter docs?

@@ -2,7 +2,6 @@ package main;
 
 import objects.BackgroundItem;
 import objects.InteractiveItem;
-import objects.Item;
 
 /**
  * @author Robby
@@ -15,11 +14,5 @@ public class Main {
 		BackgroundItem stick = new BackgroundItem("stick", "small");
 		InteractiveItem egg = new InteractiveItem("egg", "jeweled");
 		InteractiveItem sack = new InteractiveItem("sack", "brown paper");
-		System.out.println("Background items:");
-		BackgroundItem.printAll();
-		System.out.println("\nInteractable items:");
-		InteractiveItem.printAll();
-		System.out.println("\nAll items:");
-		Item.printAll();
 	}
 }

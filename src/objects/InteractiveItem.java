@@ -1,6 +1,5 @@
 package objects;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -8,7 +7,6 @@ import java.util.HashMap;
  * 
  */
 public class InteractiveItem extends Item {
-	private static ArrayList<InteractiveItem> interactiveItems = new ArrayList<InteractiveItem>();
 	private HashMap<String, String> commands;
 
 	/**
@@ -23,16 +21,5 @@ public class InteractiveItem extends Item {
 	public InteractiveItem (String name, String description) {
 		super(name, description, true);
 		commands = new HashMap<>();
-		interactiveItems.add(this);
-	}
-
-	/**
-	 * Prints all {@link InteractiveItem#InteractiveItem(String, String) Interactive
-	 * Items}
-	 */
-	public static void printAll () {
-		for (InteractiveItem i : interactiveItems) {
-			System.out.println("A " + i.getDescription() + " " + i.getName() + ".");
-		}
 	}
 }
