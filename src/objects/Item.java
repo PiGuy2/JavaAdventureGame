@@ -19,13 +19,13 @@ public class Item {
 	 * @param description
 	 *            The description of the object. This is printed when {@code look}
 	 *            is run.
-	 * @param isBackground
-	 *            If this is {@code true} commands can not be run on this object
+	 * @param isInteractive
+	 *            If this is {@code false} commands can not be run on this object
 	 */
-	public Item (String name, String description, boolean isBackground) {
+	public Item (String name, String description, boolean isInteractive) {
 		this.name = name;
 		this.description = description;
-		this.isBackground = isBackground;
+		this.isBackground = isInteractive;
 	}
 
 	// TODO getter and setter docs?
@@ -48,5 +48,9 @@ public class Item {
 
 	public void setName (String name) {
 		this.name = name;
+	}
+
+	public void printItem () {
+		System.out.println("A " + description + " " + name + ".");
 	}
 }

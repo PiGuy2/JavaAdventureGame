@@ -10,6 +10,7 @@ import main.UserInput;
  */
 public class Room {
 	private ArrayList<Item> itemsInArea;
+	private ArrayList<BackgroundItem> backgroundItems;
 
 	/**
 	 * Creates a {@code Room} object to store a list of
@@ -18,6 +19,35 @@ public class Room {
 	 */
 	public Room () {
 		itemsInArea = new ArrayList<>();
+		backgroundItems = new ArrayList<>();
+	}
+
+	/**
+	 * Creates a {@code Room} object to store a list of
+	 * {@link Item#Item(String, String, boolean) items}, backgroundItems items, and
+	 * {@link character.NPC#NPC() NPCs} in the room
+	 * 
+	 * @param itemsInArea
+	 *            is an ArrayList of Items that are in the room
+	 */
+	public Room (ArrayList<Item> itemsInArea) {
+		this.itemsInArea = itemsInArea;
+		backgroundItems = new ArrayList<>();
+	}
+
+	/**
+	 * Creates a {@code Room} object to store a list of
+	 * {@link Item#Item(String, String, boolean) items}, backgroundItems items, and
+	 * {@link character.NPC#NPC() NPCs} in the room
+	 * 
+	 * @param itemsInArea
+	 *            is an ArrayList of Items that are in the room
+	 * @param backgroundItems
+	 *            is a HashMap<String, String> of names and descriptions of items
+	 */
+	public Room (ArrayList<Item> itemsInArea, ArrayList<BackgroundItem> backgroundItems) {
+		this.itemsInArea = itemsInArea;
+		this.backgroundItems = backgroundItems;
 	}
 
 	// TODO documentation
@@ -31,8 +61,11 @@ public class Room {
 				System.out.println(i.getName());
 			}
 			String specific = UserInput.get("What item would you like (Press enter to cancel)");
+			if (specific.equals("")) {
+				//
+			}
 		} else {
-			// TODO no matches
+			return null;
 		}
 		return null;
 	}
