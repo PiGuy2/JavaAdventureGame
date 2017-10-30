@@ -43,7 +43,9 @@ public class Room {
 	 * @param itemsInArea
 	 *            is an ArrayList of Items that are in the room
 	 * @param backgroundItems
-	 *            is a HashMap<String, String> of names and descriptions of items
+	 *            is an ArrayList of
+	 *            {@link BackgroundItem#BackgroundItem(String, String) background
+	 *            items}
 	 */
 	public Room (ArrayList<Item> itemsInArea, ArrayList<BackgroundItem> backgroundItems) {
 		this.itemsInArea = itemsInArea;
@@ -56,31 +58,41 @@ public class Room {
 		if (matches.size() == 1) {
 			return matches.get(0);
 		} else if (matches.size() > 1) {
-			System.out.println("Which Item are you talking about?");
-			for (Item i : matches) {
-				System.out.println(i.getName());
-			}
-			String specific = UserInput.get("What item would you like (Press enter to cancel)");
-			if (specific.equals("")) {
-				//
+			while (true) {
+				System.out.println("Which Item are you talking about?");
+				for (Item i : matches) {
+					i.printItem();
+				}
+				String specific = UserInput.get("What item would you like (Press enter to cancel)").trim();
+				if (specific.equals("")) {
+					return null;
+				}
+				ArrayList<Item> matches2 = getItemsFromList(matches, specific);
+				if (matches2.size() == 1) {
+					return matches2.get(0);
+				} else if (matches2.size() < 1) {
+					System.out.println("That item doesn't exist");
+					return null;
+				}
+				matches = matches2;
 			}
 		} else {
+			System.out.println("That item doesn't exist");
 			return null;
 		}
-		return null;
 	}
 
 	private ArrayList<Item> getItemsFromList (ArrayList<Item> items, String param) {
 		ArrayList<Item> matches = new ArrayList<>();
 		for (int run = 0; run < 2; run++) {
-			for (Item i : itemsInArea) {
+			for (Item i : items) {
 				if (run == 0) {
-					if (i.getName().contains(param)) {
+					if (checkItemNameMatch(i, param)) {
 						matches.add(i);
 					}
 				} else {
 					for (String s : param.split(" ")) {
-						if (i.getName().contains(s)) {
+						if (checkItemNameMatch(i, s)) {
 							matches.add(i);
 							break;
 						}
@@ -92,5 +104,10 @@ public class Room {
 			}
 		}
 		return new ArrayList<>();
+	}
+
+	private boolean checkItemNameMatch (Item item, String param) {
+		String check = item.getDescription() + " " + item.getName();
+		return check.contains(param);
 	}
 }

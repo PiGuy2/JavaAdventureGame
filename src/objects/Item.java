@@ -50,6 +50,7 @@ public class Item {
 		this.name = name;
 	}
 
+	// TODO docs
 	public void printItem () {
 		System.out.println("A " + description + " " + name + ".");
 	}

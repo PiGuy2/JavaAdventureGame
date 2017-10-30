@@ -45,7 +45,7 @@ public class UserInput {
 	 *         raised 3 times
 	 */
 	public static String get (String prompt) {
-		System.out.print(prompt);
+		System.out.print(prompt + ": ");
 		for (int i = 0; i < 3; i++) {
 			try {
 				return scan.nextLine();
