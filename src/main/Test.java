@@ -8,6 +8,13 @@ import objects.InteractiveItem;
 import objects.Item;
 import objects.Room;
 
+/*
+ * TODO __THINGS TO ASK GROUP__
+ * Ask group about whether to print background items like regular items
+ * 	Probably yes, background things that should not act like times will be included in the description.
+ * 	Do I need to add background items to search (so the user can try to do things with it)?
+ */
+
 /**
  * @author Robby
  *
@@ -24,8 +31,10 @@ public class Test {
 		InteractiveItem sack4 = new InteractiveItem("sack", "paper");
 		InteractiveItem sack5 = new InteractiveItem("sack", "plastic");
 		InteractiveItem sack6 = new InteractiveItem("sack", "blue plastic");
-		ArrayList<Item> items = new ArrayList<>(Arrays.asList(egg, sack, sack2, sack3, sack4, sack5, sack6));
-		Room test = new Room(items);
+		ArrayList<InteractiveItem> items = new ArrayList<>(
+				Arrays.asList(stick, egg, sack, sack2, sack3, sack4, sack5, sack6));
+		ArrayList<BackgroundItem> bItems = new ArrayList<>(Arrays.asList(tree, log));
+		Room test = new Room(items, bItems);
 		Item itemTest = test.getItem("sack");
 		if (itemTest == null) {
 			System.out.println("null");

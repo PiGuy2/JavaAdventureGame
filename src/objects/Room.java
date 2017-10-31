@@ -9,7 +9,7 @@ import main.UserInput;
  *
  */
 public class Room {
-	private ArrayList<Item> itemsInArea;
+	private ArrayList<InteractiveItem> itemsInArea;
 	private ArrayList<BackgroundItem> backgroundItems;
 
 	/**
@@ -30,7 +30,7 @@ public class Room {
 	 * @param itemsInArea
 	 *            is an ArrayList of Items that are in the room
 	 */
-	public Room (ArrayList<Item> itemsInArea) {
+	public Room (ArrayList<InteractiveItem> itemsInArea) {
 		this.itemsInArea = itemsInArea;
 		backgroundItems = new ArrayList<>();
 	}
@@ -47,14 +47,25 @@ public class Room {
 	 *            {@link BackgroundItem#BackgroundItem(String, String) background
 	 *            items}
 	 */
-	public Room (ArrayList<Item> itemsInArea, ArrayList<BackgroundItem> backgroundItems) {
+	public Room (ArrayList<InteractiveItem> itemsInArea, ArrayList<BackgroundItem> backgroundItems) {
 		this.itemsInArea = itemsInArea;
 		this.backgroundItems = backgroundItems;
 	}
 
-	// TODO documentation
-	public Item getItem (String param) {
-		ArrayList<Item> matches = getItemsFromList(itemsInArea, param);
+	/**
+	 * If multiple Items are found, the user is asked to select a single item from
+	 * the list of items matching {@code param}.
+	 * 
+	 * @param param
+	 * @return Returns an {@link InteractiveItem#InteractiveItem(String, String)
+	 *         InteractiveItem} that is found from the argument {@code param}. This
+	 *         function searches both the description and name of all
+	 *         InteractiveItems in the room. If the user presses {@code enter} when
+	 *         prompted to select an item, {@code null} is returned. {@code null} is
+	 *         returned if no items are found.
+	 */
+	public InteractiveItem getItem (String param) {
+		ArrayList<InteractiveItem> matches = getItemsFromList(itemsInArea, param);
 		if (matches.size() == 1) {
 			return matches.get(0);
 		} else if (matches.size() > 1) {
@@ -67,7 +78,7 @@ public class Room {
 				if (specific.equals("")) {
 					return null;
 				}
-				ArrayList<Item> matches2 = getItemsFromList(matches, specific);
+				ArrayList<InteractiveItem> matches2 = getItemsFromList(matches, specific);
 				if (matches2.size() == 1) {
 					return matches2.get(0);
 				} else if (matches2.size() < 1) {
@@ -82,10 +93,11 @@ public class Room {
 		}
 	}
 
-	private ArrayList<Item> getItemsFromList (ArrayList<Item> items, String param) {
-		ArrayList<Item> matches = new ArrayList<>();
+	private ArrayList<InteractiveItem> getItemsFromList (ArrayList<InteractiveItem> items, String param) {
+		ArrayList<InteractiveItem> matches = new ArrayList<>();
+		// start ----- TODO Possible confusing code
 		for (int run = 0; run < 2; run++) {
-			for (Item i : items) {
+			for (InteractiveItem i : items) {
 				if (run == 0) {
 					if (checkItemNameMatch(i, param)) {
 						matches.add(i);
@@ -103,6 +115,7 @@ public class Room {
 				return matches;
 			}
 		}
+		// end -----
 		return new ArrayList<>();
 	}
 
