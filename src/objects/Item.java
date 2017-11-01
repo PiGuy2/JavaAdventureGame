@@ -28,29 +28,47 @@ public class Item {
 		this.isBackground = isInteractive;
 	}
 
-	// TODO getter and setter docs?
-
+	/**
+	 * Gets whether the item is a background item
+	 * 
+	 * @return Returns {@code true} if the item is a background item
+	 */
 	public boolean getBackground () {
 		return isBackground;
 	}
 
+	/**
+	 * Gets the description of the Item
+	 * 
+	 * @return The description of the Item
+	 */
 	public String getDescription () {
 		return description;
 	}
 
+	/**
+	 * Gets the name of the Item
+	 * 
+	 * @return The name of the Item
+	 */
 	public String getName () {
 		return name;
 	}
 
+	/**
+	 * Sets the description of the item
+	 * 
+	 * @param description
+	 *            is the new description of the item
+	 */
 	public void setDescription (String description) {
 		this.description = description;
 	}
 
-	public void setName (String name) {
-		this.name = name;
-	}
-
-	// TODO docs
+	/**
+	 * Prints the name of the Item in the form: A {@code (Item description)}
+	 * {@code (Item name)}.
+	 */
 	public void printItem () {
 		System.out.println("A " + description + " " + name + ".");
 	}

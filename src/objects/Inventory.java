@@ -5,7 +5,6 @@ package objects;
  *
  */
 public class Inventory {
-	// TODO docs
 	public Inventory () {
 		// TODO Auto-generated constructor stub
 	}
