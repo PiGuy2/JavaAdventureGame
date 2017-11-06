@@ -1,11 +1,20 @@
 package character;
-
+import java.util.*;
+import objects.InteractiveItem;
 /**
- * @author Robby
+ * @author Cole
  *
  */
 public class Inventory {
-	public Inventory () {
-		// TODO Auto-generated constructor stub
-	}
+    private ArrayList<InteractiveItem> items;
+    
+    // TODO docs
+    public Inventory(ArrayList<InteractiveItem> items) {
+        this.items = items;
+    }
+    
+    // TODO docs
+    public ArrayList<InteractiveItem> getItems(){
+        return items;
+    }
 }
