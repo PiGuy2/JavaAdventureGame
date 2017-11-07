@@ -9,6 +9,7 @@ public class CommandParser {
     private static HashMap<String, String> fullSubstitutions = new HashMap<String, String>();
     
     static {
+        // regular substitutions replace words or phrases in the command
         // How to add substitutions:
         // substitutions.put("string", "replacement");
         substitutions.put("north-east", "northeast");
@@ -16,6 +17,7 @@ public class CommandParser {
         substitutions.put("south-east", "southeast");
         substitutions.put("south-west", "southwest");
 
+        // cmd substitutions replace the first word in the command
         // How to add command substitutions:
         // cmdSubstitutions.put("string", "replacement");
 
@@ -32,34 +34,33 @@ public class CommandParser {
         fullSubstitutions.put("nw", "go northwest");
         fullSubstitutions.put("se", "go southeast");
         fullSubstitutions.put("sw", "go southwest");
+        fullSubstitutions.put("l", "look");
     }
 
     public static String replaceCommand (String command) {
         String oldCommand = command.trim();
-        String newCommand = command.trim();
         
         for (Map.Entry<String, String> entry : fullSubstitutions.entrySet()) {
             if (oldCommand.equals(entry.getKey())) {
                 return entry.getValue();
             }
         }
-        // ---
+
+        String newCommand = command.trim();
         String[] cmdArray = oldCommand.split(" ");
         String cmd = cmdArray[0];
         for (Map.Entry<String, String> entry : cmdSubstitutions.entrySet()) {
             if (cmd.equals(entry.getKey())) {
                 cmdArray[0] = entry.getValue();
                 newCommand = String.join(" ", cmdArray);
+                break;
             }
         }
-        // ---
-        // for (Map.Entry<String, String> entry : cmdSubstitutions.entrySet()) {
-            // if (cmd.equals(entry.getKey())) {
-                // cmdArray[0] = entry.getValue();
-                // newCommand = String.join(" ", cmdArray);
-            // }
-        // }
-        
+
+        for (Map.Entry<String, String> entry : substitutions.entrySet()) {
+            newCommand = newCommand.replaceAll(entry.getKey(), entry.getValue());
+        }
+
         return oldCommand;
     }
 }
