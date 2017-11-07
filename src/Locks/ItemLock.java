@@ -1,6 +1,6 @@
 package Locks;
 import character.Inventory;
-import java.util.*;
+import java.util.ArrayList;
 import objects.InteractiveItem;
 /**
  * Write a description of class ItemLock here.
