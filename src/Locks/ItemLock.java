@@ -1,5 +1,7 @@
 package Locks;
-
+import character.Inventory;
+import java.util.ArrayList;
+import objects.InteractiveItem;
 /**
  * Write a description of class ItemLock here.
  *
@@ -10,22 +12,45 @@ public class ItemLock {
     public String name;
     public String UNLitem;
     public String type;
-    public void ItemLock(String name, String UNLitem, String type){
+    public boolean locked;
+    public ArrayList<InteractiveItem> items;
+    public void ItemLock(String name, String UNLitem, boolean locked, ArrayList<InteractiveItem> items) {
         this.name = name;
         this.UNLitem = UNLitem;
-        this.type = type;
+        this.locked = locked;
+        this.items = items;
     }
-    public String getType(){
-        return type;
+
+    public String getName(){
+        return name;
     }
+
     public String getUNLitem(){
-        return type;
+        return UNLitem;
     }
-    public void Unlock(ItemLock meme){
-        if (meme.getType() == "item"){
-        //scannerboi if the 
-        //    == meme.getUNLitem();
-        //unlock
+
+    public boolean getlocked(){
+        return locked;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public void setUNLitem(String UNLitem){
+        this.UNLitem = UNLitem;
+    }
+
+    public void setlocked(boolean locked){
+        this.locked = locked;
+    }
+
+    public void Unlock(ItemLock lock){
+
+        if (items.contains(lock.getUNLitem())){
+            lock.setlocked(false);
+            System.out.println("Good one pal, it's unlocked");
         }
+
     }
 }
