@@ -37,6 +37,8 @@ public class CommandParser {
         fullSubstitutions.put("l", "look");
     }
 
+    // TODO
+    // (look see view), (go walk run crawl sprint jog move), (grab take get), use, break
     public static String replaceCommand (String command) {
         String oldCommand = command.trim();
         
