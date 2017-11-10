@@ -15,7 +15,7 @@ public class Game {
         // Game
     }
 
-    // run game
-    
-    // destructor
+    public boolean runGame () {
+        return true;
+    }
 }

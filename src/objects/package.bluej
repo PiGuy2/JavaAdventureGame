@@ -1,12 +1,12 @@
 #BlueJ package file
 dependency1.from=Room
-dependency1.to=Item
+dependency1.to=InteractiveItem
 dependency1.type=UsesDependency
 dependency2.from=Room
 dependency2.to=BackgroundItem
 dependency2.type=UsesDependency
 dependency3.from=Room
-dependency3.to=InteractiveItem
+dependency3.to=Item
 dependency3.type=UsesDependency
 objectbench.height=110
 objectbench.width=776
@@ -14,8 +14,8 @@ package.divider.horizontal=0.6
 package.divider.vertical=0.7841328413284133
 package.editor.height=418
 package.editor.width=674
-package.editor.x=301
-package.editor.y=693
+package.editor.x=103
+package.editor.y=717
 package.frame.height=600
 package.frame.width=800
 package.numDependencies=3

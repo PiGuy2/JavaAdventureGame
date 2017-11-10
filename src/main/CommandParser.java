@@ -20,6 +20,17 @@ public class CommandParser {
         // cmd substitutions replace the first word in the command
         // How to add command substitutions:
         // cmdSubstitutions.put("string", "replacement");
+        cmdSubstitutions.put("walk", "go");
+        cmdSubstitutions.put("run", "go");
+        cmdSubstitutions.put("crawl", "go");
+        cmdSubstitutions.put("sprint", "go");
+        cmdSubstitutions.put("jog", "go");
+        
+        cmdSubstitutions.put("grab", "take");
+        cmdSubstitutions.put("get", "take");
+        
+        cmdSubstitutions.put("see", "look");
+        cmdSubstitutions.put("view", "look");
 
         // full substitutions only replace if the whole command given equals
         // How to full substitutions:
@@ -36,9 +47,13 @@ public class CommandParser {
         fullSubstitutions.put("sw", "go southwest");
         fullSubstitutions.put("l", "look");
     }
+    
+    private static String replaceLast(String text, String regex, String replacement) {
+        return text.replaceFirst("(?s)(.*)" + regex, "$1" + replacement);
+    }
 
     // TODO
-    // (look see view), (go walk run crawl sprint jog move), (grab take get), use, break
+    // (look see view), (go walk run crawl sprint jog move), (take grab get), use, break, help
     public static String replaceCommand (String command) {
         String oldCommand = command.trim();
         
@@ -60,7 +75,13 @@ public class CommandParser {
         }
 
         for (Map.Entry<String, String> entry : substitutions.entrySet()) {
-            newCommand = newCommand.replaceAll(entry.getKey(), entry.getValue());
+            newCommand = newCommand.replaceAll(" " + entry.getKey() + " ", entry.getValue());
+            if (newCommand.startsWith(entry.getKey())) {
+                newCommand = newCommand.replaceFirst(entry.getKey(), entry.getValue());
+            }
+            if (newCommand.endsWith(entry.getKey())) {
+                newCommand = replaceLast(newCommand, entry.getKey(), entry.getValue());
+            }
         }
 
         return oldCommand;

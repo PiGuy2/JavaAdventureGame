@@ -10,7 +10,14 @@ public class Main {
      */
     public static void main (String [] args) {
         while (true) {
-            // run the game (use game class)
+            Game game = new Game();
+            boolean win = game.runGame();
+            System.out.print("You ");
+            System.out.println(win ? "won!" : "lost :(");
+            boolean quit = UserInput.getBool("Would you like to play again");
+            if (!quit) {
+                break;
+            }
         }
     }
 }
