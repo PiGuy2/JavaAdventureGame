@@ -1,7 +1,5 @@
 package main;
 
-import java.util.ArrayList;
-
 import objects.Room;
 
 /**
@@ -14,33 +12,31 @@ import objects.Room;
 public class Game {
 	private boolean canDie;
 	private Room deathRoom;
-	private ArrayList<Room> rooms;
-	private Room startingRoom;
+	private Room currentRoom;
 
 	/**
 	 * Constructor for objects of class Game
 	 */
 	public Game (Room startingRoom) {
 		canDie = false;
-		this.startingRoom = startingRoom;
+		this.currentRoom = startingRoom;
 	}
 
 	public Game (Room deathRoom, Room startingRoom) {
 		canDie = true;
 		this.deathRoom = deathRoom;
-		this.startingRoom = startingRoom;
+		this.currentRoom = startingRoom;
 	}
 
 	public boolean runGame () {
-		String cmd = CommandParser.replaceCommand(UserInput.get("What would you like to do"));
-		String cmdAction = cmd.split(" ")[0];
-		if (cmdAction.equals("look")) {
-			// look
-		}
 		while (true) {
-			if (true) {
-				break;
+			String cmd = CommandParser.replaceCommand(UserInput.get("What would you like to do"));
+			String cmdAction = cmd.split(" ")[0];
+			if (cmdAction.equals("look")) {
+				currentRoom.printAll();
+				currentRoom.printItems();
 			}
+			break;
 		}
 		return true;
 	}
