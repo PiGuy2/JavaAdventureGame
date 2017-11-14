@@ -2,6 +2,7 @@
 objectbench.height=164
 objectbench.width=2536
 package.divider.horizontal=0.6
+<<<<<<< HEAD:src/Locks/package.bluej
 package.divider.vertical=0.8663017982799062
 package.editor.height=1101
 package.editor.width=2434
@@ -9,6 +10,15 @@ package.editor.x=0
 package.editor.y=23
 package.frame.height=1337
 package.frame.width=2560
+=======
+package.divider.vertical=0.6845018450184502
+package.editor.height=364
+package.editor.width=674
+package.editor.x=916
+package.editor.y=725
+package.frame.height=600
+package.frame.width=800
+>>>>>>> master:src/locks/package.bluej
 package.numDependencies=0
 package.numTargets=1
 package.showExtends=true

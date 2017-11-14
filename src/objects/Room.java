@@ -311,21 +311,28 @@ public class Room {
 	 * Prints room name, description, and extended description
 	 */
 	public void printAll () {
-		// TODO
+		printRoom();
+		System.out.println(extDescription);
 	}
 
 	/**
 	 * Prints room name and description
 	 */
 	public void printRoom () {
-		// TODO
+		System.out.println("You are in a " + description + " " + name);
 	}
 
 	/**
 	 * Prints all items in the Room
 	 */
 	public void printItems () {
-		// TODO
+		ArrayList<Item> mixedItems = new ArrayList<>();
+		mixedItems.addAll(itemsInArea);
+		mixedItems.addAll(backgroundItems);
+		Collections.shuffle(mixedItems);
+		for (Item i : mixedItems) {
+			i.printItem();
+		}
 	}
 }
  
