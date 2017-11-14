@@ -31,6 +31,7 @@ public class CommandParser {
 		cmdSubstitutions.put("se", "go southeast");
 		cmdSubstitutions.put("sw", "go southwest");
 	}
+	//look, go walk run crawl sprint jog, take grab get, use, break, help, type, move(item), pull, press, remove, shoot, kill, open, wear(as in wear a coat), equip(dagger), 
 
 	public static String replaceCommand (String oldCommand) {
 		String newCommand = oldCommand;
