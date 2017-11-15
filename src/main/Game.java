@@ -7,7 +7,6 @@ import objects.Room;
  * runGame()} takes commands from the user repeatedly until the game ends.
  *
  * @author Robby
- * @version (a version number or a date)
  */
 public class Game {
 	private boolean canDie;

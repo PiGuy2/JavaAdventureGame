@@ -2,12 +2,13 @@ package objects;
 
 /**
  * @author Robby
+ * @author Owen
  * 
  */
 public class Item {
 	protected String description;
 
-	protected boolean isBackground;
+	protected boolean isInteractive;
 
 	protected String name;
 
@@ -25,16 +26,17 @@ public class Item {
 	public Item (String name, String description, boolean isInteractive) {
 		this.name = name;
 		this.description = description;
-		this.isBackground = isInteractive;
+		this.isInteractive = isInteractive;
 	}
+	
 
 	/**
-	 * Gets whether the item is a background item
+	 * Gets whether the item is a Interactive item
 	 * 
-	 * @return Returns {@code true} if the item is a background item
+	 * @return {@code true} if the item is a Interactive item
 	 */
-	public boolean getBackground () {
-		return isBackground;
+	public boolean getInteractive () {
+		return isInteractive;
 	}
 
 	/**
