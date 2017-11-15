@@ -52,13 +52,12 @@ public class CommandParser {
 		return text.replaceFirst("(?s)(.*)" + regex, "$1" + replacement);
 	}
 
-	// TODO
-	// (look see view), (go walk run crawl sprint jog move), (take grab get), use,
-	// break, help
+	// TODO add commands
 
-	// look, go walk run crawl sprint jog, take grab get, use, break, help, type,
-	// move(item), pull, press, remove, shoot, kill, open, wear(as in wear a coat),
-	// equip(dagger)
+	// look (see, view, look at), go (walk run crawl sprint jog), take (grab get),
+	// use, break, help, type, move {item}, pull, press, remove, shoot, kill, open,
+	// wear [as in wear a coat], equip {dagger}
+
 	public static String replaceCommand (String command) {
 		String oldCommand = command.trim();
 
@@ -68,9 +67,12 @@ public class CommandParser {
 			}
 		}
 
+		// -----
+
 		String newCommand = command.trim();
 		String [] cmdArray = oldCommand.split(" ");
 		String cmd = cmdArray[0];
+
 		for (Map.Entry<String, String> entry : cmdSubstitutions.entrySet()) {
 			if (cmd.equals(entry.getKey())) {
 				cmdArray[0] = entry.getValue();
@@ -89,6 +91,6 @@ public class CommandParser {
 			}
 		}
 
-		return oldCommand;
+		return newCommand;
 	}
 }

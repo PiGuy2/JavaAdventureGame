@@ -1,8 +1,7 @@
-package Locks;
-import character.Inventory;
-import java.util.ArrayList;
-import objects.InteractiveItem;
+package locks;
+
 import character.Player;
+import objects.InteractiveItem;
 
 /**
  * Write a description of class ItemLock here.
@@ -12,45 +11,45 @@ import character.Player;
  */
 
 public class ItemLock {
-    public String name;
-    public String UNLitem;
-    public String type;
-    public boolean locked;
-    
-    public void ItemLock(String name, String UNLitem, boolean locked) {
-        this.name = name;
-        this.UNLitem = UNLitem;
-        this.locked = locked;
-    }
+	public String name;
+	public InteractiveItem UNLitem;
+	public String type;
+	public boolean locked;
 
-    public String getName() {
-        return name;
-    }
+	public ItemLock (String name, InteractiveItem UNLitem, boolean locked) {
+		this.name = name;
+		this.UNLitem = UNLitem;
+		this.locked = locked;
+	}
 
-    public String getUNLitem() {
-        return UNLitem;
-    }
+	public String getName () {
+		return name;
+	}
 
-    public boolean getlocked() {
-        return locked;
-    }
+	public InteractiveItem getUNLitem () {
+		return UNLitem;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public boolean getlocked () {
+		return locked;
+	}
 
-    public void setUNLitem(String UNLitem) {
-        this.UNLitem = UNLitem;
-    }
+	public void setName (String name) {
+		this.name = name;
+	}
 
-    public void setlocked(boolean locked) {
-        this.locked = locked;
-    }
+	public void setUNLitem (InteractiveItem UNLitem) {
+		this.UNLitem = UNLitem;
+	}
 
-    public void Unlock(ItemLock lock) {
-        if (Player.inventory.getItems().contains(lock.getUNLitem())){
-            lock.setlocked(false);
-            System.out.println("Good one pal, it's unlocked");
-        }
-    }
+	public void setlocked (boolean locked) {
+		this.locked = locked;
+	}
+
+	public void Unlock (ItemLock lock) {
+		if (Player.inventory.getItems().contains(lock.getUNLitem())) {
+			lock.setlocked(false);
+			System.out.println("Good one pal, it's unlocked");
+		}
+	}
 }
