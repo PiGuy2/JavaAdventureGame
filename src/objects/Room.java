@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
+import main.CommandParser;
 import main.UserInput;
 
 /**
@@ -30,6 +31,8 @@ public class Room {
 
 		itemsInArea = new ArrayList<>();
 		backgroundItems = new ArrayList<>();
+
+		runOnInit();
 	}
 
 	/**
@@ -47,6 +50,8 @@ public class Room {
 
 		this.itemsInArea = itemsInArea;
 		backgroundItems = new ArrayList<>();
+
+		runOnInit();
 	}
 
 	/**
@@ -68,6 +73,8 @@ public class Room {
 
 		this.itemsInArea = itemsInArea;
 		this.backgroundItems = backgroundItems;
+
+		runOnInit();
 	}
 
 	/**
@@ -85,6 +92,8 @@ public class Room {
 
 		itemsInArea = new ArrayList<>();
 		backgroundItems = new ArrayList<>();
+
+		runOnInit();
 	}
 
 	public Room (String name, ArrayList<InteractiveItem> itemsInArea) {
@@ -94,6 +103,8 @@ public class Room {
 
 		this.itemsInArea = itemsInArea;
 		backgroundItems = new ArrayList<>();
+
+		runOnInit();
 	}
 
 	public Room (String name, ArrayList<InteractiveItem> itemsInArea, ArrayList<BackgroundItem> backgroundItems) {
@@ -103,6 +114,8 @@ public class Room {
 
 		this.itemsInArea = itemsInArea;
 		this.backgroundItems = backgroundItems;
+
+		runOnInit();
 	}
 
 	/**
@@ -122,6 +135,8 @@ public class Room {
 
 		itemsInArea = new ArrayList<>();
 		backgroundItems = new ArrayList<>();
+
+		runOnInit();
 	}
 
 	/**
@@ -141,6 +156,8 @@ public class Room {
 
 		this.itemsInArea = itemsInArea;
 		backgroundItems = new ArrayList<>();
+
+		runOnInit();
 	}
 
 	/**
@@ -161,6 +178,8 @@ public class Room {
 
 		this.itemsInArea = itemsInArea;
 		this.backgroundItems = backgroundItems;
+
+		runOnInit();
 	}
 
 	/**
@@ -182,6 +201,8 @@ public class Room {
 
 		itemsInArea = new ArrayList<>();
 		backgroundItems = new ArrayList<>();
+
+		runOnInit();
 	}
 
 	/**
@@ -203,6 +224,8 @@ public class Room {
 
 		this.itemsInArea = itemsInArea;
 		backgroundItems = new ArrayList<>();
+
+		runOnInit();
 	}
 
 	/**
@@ -225,6 +248,12 @@ public class Room {
 
 		this.itemsInArea = itemsInArea;
 		this.backgroundItems = backgroundItems;
+
+		runOnInit();
+	}
+
+	private void runOnInit () {
+		directions = new HashMap<>();
 	}
 
 	// ------------------------- END CONSTUCTORS -------------------------
@@ -335,7 +364,7 @@ public class Room {
 	 *            Room to move to
 	 */
 	public void setDirection (String d, Room room) {
-		directions.put(d, room);
+		directions.put(CommandParser.replaceDirection(d), room);
 	}
 
 	public void setSecondaryDirections (Room ne, Room nw, Room se, Room sw) {

@@ -44,31 +44,41 @@ public class CommandParser {
 		 * How to add full substitutions: fullSubstitutions.put("string",
 		 * "replacement");
 		 */
+		fullSubstitutions.put("l", "look");
 
 		/*
 		 * full substitutions only replace if the whole command given equals
 		 * 
 		 * How to add full substitutions: dirSubstitutions.put("string", "replacement");
 		 */
-		dirSubstitutions.put("u", "go up");
-		dirSubstitutions.put("d", "go down");
-		dirSubstitutions.put("n", "go north");
-		dirSubstitutions.put("e", "go east");
-		dirSubstitutions.put("s", "go south");
-		dirSubstitutions.put("w", "go west");
-		dirSubstitutions.put("ne", "go northeast");
-		dirSubstitutions.put("nw", "go northwest");
-		dirSubstitutions.put("se", "go southeast");
-		dirSubstitutions.put("sw", "go southwest");
-		dirSubstitutions.put("l", "look");
+		dirSubstitutions.put("u", "up");
+		dirSubstitutions.put("d", "down");
+		dirSubstitutions.put("n", "north");
+		dirSubstitutions.put("e", "east");
+		dirSubstitutions.put("s", "south");
+		dirSubstitutions.put("w", "west");
+		dirSubstitutions.put("ne", "northeast");
+		dirSubstitutions.put("nw", "northwest");
+		dirSubstitutions.put("se", "southeast");
+		dirSubstitutions.put("sw", "southwest");
 	}
 
+	// test:
+	// go n nw south-east se; walk west n; help & crawl sw d down u
+
+	/*
+	 * look (see, view, look at), go (walk run crawl sprint jog), take (grab get),
+	 * use, break, help, type, move {item}, pull, press, remove, shoot, kill, open,
+	 * wear [as in wear a coat], equip {dagger}
+	 */
 	public static String replaceCommand (String command) {
 		String oldCommand = command.trim();
 
+		oldCommand = oldCommand.replaceAll(" +", " ");
+
 		String dirCommand = replaceDirection(oldCommand);
 		if (!dirCommand.equals(oldCommand)) {
-			return dirCommand;
+			return "go " + dirCommand;
 		}
 
 		for (Map.Entry<String, String> entry : fullSubstitutions.entrySet()) {
@@ -79,7 +89,7 @@ public class CommandParser {
 
 		// -----
 
-		String newCommand = command.trim();
+		String newCommand = new String(oldCommand);
 		String [] cmdArray = oldCommand.split(" ");
 		String cmd = cmdArray[0];
 
@@ -91,24 +101,25 @@ public class CommandParser {
 			}
 		}
 
-		for (Map.Entry<String, String> entry : substitutions.entrySet()) {
-			newCommand = newCommand.replaceAll(" " + entry.getKey() + " ", entry.getValue());
-			if (newCommand.startsWith(entry.getKey())) {
+		HashMap<String, String> singleSubs = new HashMap<>();
+		singleSubs.putAll(substitutions);
+		singleSubs.putAll(dirSubstitutions);
+		for (Map.Entry<String, String> entry : singleSubs.entrySet()) {
+			// System.out.println(entry.getKey() + " --> " + entry.getValue());
+			newCommand = newCommand.replaceAll(" " + entry.getKey() + " ", " " + entry.getValue() + " ");
+			// System.out.println("\t1. " + newCommand);
+			if (newCommand.startsWith(entry.getKey() + " ")) {
 				newCommand = newCommand.replaceFirst(entry.getKey(), entry.getValue());
 			}
-			if (newCommand.endsWith(entry.getKey())) {
+			// System.out.println("\t2. " + newCommand);
+			if (newCommand.endsWith(" " + entry.getKey())) {
 				newCommand = replaceLast(newCommand, entry.getKey(), entry.getValue());
 			}
+			// System.out.println("\t3. " + newCommand);
 		}
 
 		return newCommand;
 	}
-
-	// TODO add commands
-
-	// look (see, view, look at), go (walk run crawl sprint jog), take (grab get),
-	// use, break, help, type, move {item}, pull, press, remove, shoot, kill, open,
-	// wear [as in wear a coat], equip {dagger}
 
 	public static String replaceDirection (String direction) {
 		for (Map.Entry<String, String> entry : dirSubstitutions.entrySet()) {
