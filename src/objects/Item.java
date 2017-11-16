@@ -31,21 +31,21 @@ public class Item {
 	
 
 	/**
-	 * Gets whether the item is a Interactive item
-	 * 
-	 * @return {@code true} if the item is a Interactive item
-	 */
-	public boolean getInteractive () {
-		return isInteractive;
-	}
-
-	/**
 	 * Gets the description of the Item
 	 * 
 	 * @return The description of the Item
 	 */
 	public String getDescription () {
 		return description;
+	}
+
+	/**
+	 * Gets whether the item is a Interactive item
+	 * 
+	 * @return {@code true} if the item is a Interactive item
+	 */
+	public boolean getInteractive () {
+		return isInteractive;
 	}
 
 	/**
@@ -58,6 +58,14 @@ public class Item {
 	}
 
 	/**
+	 * Prints the name of the Item in the form: A {@code (Item description)}
+	 * {@code (Item name)}.
+	 */
+	public void printItem () {
+		System.out.println("A " + description + " " + name + ".");
+	}
+
+	/**
 	 * Sets the description of the item
 	 * 
 	 * @param description
@@ -65,13 +73,5 @@ public class Item {
 	 */
 	public void setDescription (String description) {
 		this.description = description;
-	}
-
-	/**
-	 * Prints the name of the Item in the form: A {@code (Item description)}
-	 * {@code (Item name)}.
-	 */
-	public void printItem () {
-		System.out.println("A " + description + " " + name + ".");
 	}
 }

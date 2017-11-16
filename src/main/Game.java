@@ -12,8 +12,8 @@ import objects.Room;
  */
 public class Game {
 	private boolean canDie;
-	private Room deathRoom;
 	private Room currentRoom;
+	private Room deathRoom;
 
 	/**
 	 * Constructor for objects of class Game
@@ -50,12 +50,14 @@ public class Game {
 					System.out.println("You can't look at things");
 				}
 			} else if (cmdAction.equals("go")) {
-				Room possCurrentRoom = currentRoom.getRoomFromDir(cmdArgs[0]);
-				if (possCurrentRoom.equals(null)) {
-					System.out.println("Direction does not exist");
-				} else {
-					currentRoom = possCurrentRoom;
-					System.out.println("Room changed");
+				for (String i : cmdArgs) {
+					Room possCurrentRoom = currentRoom.getRoomFromDir(i);
+					if (possCurrentRoom.equals(null)) {
+						System.out.println("You cannot move " + i);
+					} else {
+						currentRoom = possCurrentRoom;
+						System.out.println("Room changed");
+					}
 				}
 			} else if (cmdAction.equals("take")) {
 				System.out.println("cmd: take");
@@ -88,8 +90,8 @@ public class Game {
 			} else if (cmdAction.equals("quit")) {
 				break;
 			} else {
-				System.out.println("\"" + cmd + "\" is not a valid command, because " + "\""
-						+ cmdAction + "\" is not a valid action yet.");
+				System.out.println("\"" + cmd + "\" is not a valid command, because " + "\"" + cmdAction
+						+ "\" is not a valid action yet.");
 			}
 		}
 		return true;

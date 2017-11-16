@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CommandParser {
-	private static HashMap<String, String> substitutions = new HashMap<String, String>();
 	private static HashMap<String, String> cmdSubstitutions = new HashMap<String, String>();
-	private static HashMap<String, String> fullSubstitutions = new HashMap<String, String>();
 	private static HashMap<String, String> dirSubstitutions = new HashMap<String, String>();
+	private static HashMap<String, String> fullSubstitutions = new HashMap<String, String>();
+	private static HashMap<String, String> substitutions = new HashMap<String, String>();
 
 	static {
 		/*
@@ -63,16 +63,6 @@ public class CommandParser {
 		dirSubstitutions.put("l", "look");
 	}
 
-	private static String replaceLast (String text, String regex, String replacement) {
-		return text.replaceFirst("(?s)(.*)" + regex, "$1" + replacement);
-	}
-
-	// TODO add commands
-
-	// look (see, view, look at), go (walk run crawl sprint jog), take (grab get),
-	// use, break, help, type, move {item}, pull, press, remove, shoot, kill, open,
-	// wear [as in wear a coat], equip {dagger}
-
 	public static String replaceCommand (String command) {
 		String oldCommand = command.trim();
 
@@ -114,6 +104,12 @@ public class CommandParser {
 		return newCommand;
 	}
 
+	// TODO add commands
+
+	// look (see, view, look at), go (walk run crawl sprint jog), take (grab get),
+	// use, break, help, type, move {item}, pull, press, remove, shoot, kill, open,
+	// wear [as in wear a coat], equip {dagger}
+
 	public static String replaceDirection (String direction) {
 		for (Map.Entry<String, String> entry : dirSubstitutions.entrySet()) {
 			if (direction.trim().equals(entry.getKey())) {
@@ -121,5 +117,9 @@ public class CommandParser {
 			}
 		}
 		return direction;
+	}
+
+	private static String replaceLast (String text, String regex, String replacement) {
+		return text.replaceFirst("(?s)(.*)" + regex, "$1" + replacement);
 	}
 }

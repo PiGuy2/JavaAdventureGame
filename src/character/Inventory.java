@@ -18,11 +18,6 @@ public class Inventory {
         this.items = items;
     }
     
-    // TODO docs
-    public ArrayList<InteractiveItem> getItems () {
-        return items;
-    }
-    
     /**
      * adds item to array list
      */
@@ -32,6 +27,11 @@ public class Inventory {
     
     public void addItems (ArrayList<InteractiveItem> interactiveItems) {
         items.addAll(interactiveItems);
+    }
+    
+    // TODO docs
+    public ArrayList<InteractiveItem> getItems () {
+        return items;
     }
     /**
      * removes item from arraylsit

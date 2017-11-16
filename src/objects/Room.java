@@ -61,8 +61,7 @@ public class Room {
 	 *            {@link BackgroundItem#BackgroundItem(String, String) background
 	 *            items}
 	 */
-	public Room (ArrayList<InteractiveItem> itemsInArea,
-			ArrayList<BackgroundItem> backgroundItems) {
+	public Room (ArrayList<InteractiveItem> itemsInArea, ArrayList<BackgroundItem> backgroundItems) {
 		name = "";
 		description = "";
 		extDescription = "";
@@ -97,8 +96,7 @@ public class Room {
 		backgroundItems = new ArrayList<>();
 	}
 
-	public Room (String name, ArrayList<InteractiveItem> itemsInArea,
-			ArrayList<BackgroundItem> backgroundItems) {
+	public Room (String name, ArrayList<InteractiveItem> itemsInArea, ArrayList<BackgroundItem> backgroundItems) {
 		this.name = name;
 		description = "";
 		extDescription = "";
@@ -198,8 +196,7 @@ public class Room {
 	 * @param extDescription
 	 *            is printed on a new line after the name and description
 	 */
-	public Room (String name, String description, String extDescription,
-			ArrayList<InteractiveItem> itemsInArea) {
+	public Room (String name, String description, String extDescription, ArrayList<InteractiveItem> itemsInArea) {
 		this.name = name;
 		this.description = description;
 		this.extDescription = extDescription;
@@ -220,8 +217,8 @@ public class Room {
 	 * @param extDescription
 	 *            is printed on a new line after the name and description
 	 */
-	public Room (String name, String description, String extDescription,
-			ArrayList<InteractiveItem> itemsInArea, ArrayList<BackgroundItem> backgroundItems) {
+	public Room (String name, String description, String extDescription, ArrayList<InteractiveItem> itemsInArea,
+			ArrayList<BackgroundItem> backgroundItems) {
 		this.name = name;
 		this.description = description;
 		this.extDescription = extDescription;
@@ -258,8 +255,7 @@ public class Room {
 				for (Item i : matches) {
 					i.printItem();
 				}
-				String specific = UserInput.get("What item would you like (Press enter to cancel)")
-						.trim();
+				String specific = UserInput.get("What item would you like (Press enter to cancel)").trim();
 				if (specific.equals("")) {
 					return null;
 				}
@@ -274,6 +270,23 @@ public class Room {
 			}
 		} else {
 			System.out.println("That item doesn't exist");
+			return null;
+		}
+	}
+
+	/**
+	 * Get a room based on direction relative to this room. Returns {@code null} if
+	 * given a nonexistent direction
+	 * 
+	 * @param dir
+	 *            The direction you want to go
+	 * @return The room specified by the direction
+	 */
+	public Room getRoomFromDir (String dir) {
+		try {
+			return directions.get(dir);
+		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -313,18 +326,6 @@ public class Room {
 		directions.put("west", w);
 	}
 
-	public void setSecondaryDirections (Room ne, Room nw, Room se, Room sw) {
-		directions.put("northeast", ne);
-		directions.put("northwest", nw);
-		directions.put("southeast", se);
-		directions.put("southwest", sw);
-	}
-
-	public void setVerticalDirections (Room u, Room d) {
-		directions.put("up", u);
-		directions.put("down", d);
-	}
-
 	/**
 	 * Set direction you can move when you are in this room
 	 * 
@@ -337,20 +338,20 @@ public class Room {
 		directions.put(d, room);
 	}
 
-	public void unsetDirection (String d) {
-		directions.remove(d);
+	public void setSecondaryDirections (Room ne, Room nw, Room se, Room sw) {
+		directions.put("northeast", ne);
+		directions.put("northwest", nw);
+		directions.put("southeast", se);
+		directions.put("southwest", sw);
 	}
 
-	/**
-	 * Get a room based on direction relative to this room. Returns {@code null} if
-	 * given a nonexistent direction
-	 * 
-	 * @param dir
-	 *            The direction you want to go
-	 * @return The room specified by the direction
-	 */
-	public Room getRoomFromDir (String dir) {
-		return directions.get(dir);
+	public void setVerticalDirections (Room u, Room d) {
+		directions.put("up", u);
+		directions.put("down", d);
+	}
+
+	public void unsetDirection (String d) {
+		directions.remove(d);
 	}
 
 	private boolean checkItemNameMatch (Item item, String param) {
