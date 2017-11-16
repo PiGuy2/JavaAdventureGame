@@ -8,18 +8,23 @@ import objects.InteractiveItem;
  *
  * @author Cole
  * @author Owen
+ * @author Robby
  */
 
 public class ItemLock {
-	public String name;
-	public InteractiveItem UNLitem;
-	public String type;
 	public boolean locked;
+	public String name;
+	public String type;
+	public InteractiveItem UNLitem;
 
 	public ItemLock (String name, InteractiveItem UNLitem, boolean locked) {
 		this.name = name;
 		this.UNLitem = UNLitem;
 		this.locked = locked;
+	}
+
+	public boolean getlocked () {
+		return locked;
 	}
 
 	public String getName () {
@@ -30,8 +35,8 @@ public class ItemLock {
 		return UNLitem;
 	}
 
-	public boolean getlocked () {
-		return locked;
+	public void setlocked (boolean locked) {
+		this.locked = locked;
 	}
 
 	public void setName (String name) {
@@ -40,10 +45,6 @@ public class ItemLock {
 
 	public void setUNLitem (InteractiveItem UNLitem) {
 		this.UNLitem = UNLitem;
-	}
-
-	public void setlocked (boolean locked) {
-		this.locked = locked;
 	}
 
 	public void Unlock (ItemLock lock) {

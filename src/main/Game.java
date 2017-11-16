@@ -40,10 +40,23 @@ public class Game {
 			String cmdAction = cmd.split(" ")[0];
 			String [] cmdArgs = Arrays.copyOfRange(cmd.split(" "), 1, cmd.split(" ").length);
 			if (cmdAction.equals("look")) {
-				currentRoom.printAll();
-				currentRoom.printItems();
+				if (cmdArgs.length == 0) {
+					currentRoom.printAll();
+					currentRoom.printItems();
+				} else {
+					if (cmdArgs[0].equals("at")) {
+						cmdArgs = Arrays.copyOfRange(cmdArgs, 2, cmdArgs.length);
+					}
+					System.out.println("You can't look at things");
+				}
 			} else if (cmdAction.equals("go")) {
-				System.out.println("cmd: go");
+				Room possCurrentRoom = currentRoom.getRoomFromDir(cmdArgs[0]);
+				if (possCurrentRoom.equals(null)) {
+					System.out.println("Direction does not exist");
+				} else {
+					currentRoom = possCurrentRoom;
+					System.out.println("Room changed");
+				}
 			} else if (cmdAction.equals("take")) {
 				System.out.println("cmd: take");
 			} else if (cmdAction.equals("use")) {
@@ -75,8 +88,8 @@ public class Game {
 			} else if (cmdAction.equals("quit")) {
 				break;
 			} else {
-				System.out.println("\"" + cmd + "\" is not a valid command, because " + "\"" + cmdAction
-						+ "\" is not a valid action yet.");
+				System.out.println("\"" + cmd + "\" is not a valid command, because " + "\""
+						+ cmdAction + "\" is not a valid action yet.");
 			}
 		}
 		return true;
