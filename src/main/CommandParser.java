@@ -45,6 +45,7 @@ public class CommandParser {
 		 * "replacement");
 		 */
 		fullSubstitutions.put("l", "look");
+		fullSubstitutions.put("i", "inventory");
 
 		/*
 		 * full substitutions only replace if the whole command given equals

@@ -12,7 +12,8 @@ public class Main {
 	 */
 	public static void main (String [] args) {
 		while (true) {
-			Game game = new Game(new Room());
+			Room startRoom = RoomInit.makeRooms();
+			Game game = new Game(startRoom);
 			boolean win = game.runGame();
 			System.out.print("You ");
 			System.out.println(win ? "won!" : "lost :(");

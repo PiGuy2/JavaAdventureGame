@@ -15,7 +15,9 @@ public class Room {
 	private ArrayList<BackgroundItem> backgroundItems;
 	private String description;
 	private HashMap<String, Room> directions;
+
 	private String extDescription;
+
 	private ArrayList<InteractiveItem> itemsInArea;
 	private String name;
 
@@ -66,8 +68,7 @@ public class Room {
 	 *            {@link BackgroundItem#BackgroundItem(String, String) background
 	 *            items}
 	 */
-	public Room (ArrayList<InteractiveItem> itemsInArea,
-			ArrayList<BackgroundItem> backgroundItems) {
+	public Room (ArrayList<InteractiveItem> itemsInArea, ArrayList<BackgroundItem> backgroundItems) {
 		name = "";
 		description = "";
 		extDescription = "";
@@ -108,8 +109,7 @@ public class Room {
 		runOnInit();
 	}
 
-	public Room (String name, ArrayList<InteractiveItem> itemsInArea,
-			ArrayList<BackgroundItem> backgroundItems) {
+	public Room (String name, ArrayList<InteractiveItem> itemsInArea, ArrayList<BackgroundItem> backgroundItems) {
 		this.name = name;
 		description = "";
 		extDescription = "";
@@ -219,8 +219,7 @@ public class Room {
 	 * @param extDescription
 	 *            is printed on a new line after the name and description
 	 */
-	public Room (String name, String description, String extDescription,
-			ArrayList<InteractiveItem> itemsInArea) {
+	public Room (String name, String description, String extDescription, ArrayList<InteractiveItem> itemsInArea) {
 		this.name = name;
 		this.description = description;
 		this.extDescription = extDescription;
@@ -243,8 +242,8 @@ public class Room {
 	 * @param extDescription
 	 *            is printed on a new line after the name and description
 	 */
-	public Room (String name, String description, String extDescription,
-			ArrayList<InteractiveItem> itemsInArea, ArrayList<BackgroundItem> backgroundItems) {
+	public Room (String name, String description, String extDescription, ArrayList<InteractiveItem> itemsInArea,
+			ArrayList<BackgroundItem> backgroundItems) {
 		this.name = name;
 		this.description = description;
 		this.extDescription = extDescription;
@@ -255,11 +254,9 @@ public class Room {
 		runOnInit();
 	}
 
-	private void runOnInit () {
-		directions = new HashMap<>();
+	public HashMap<String, Room> getDirections () {
+		return directions;
 	}
-
-	// ------------------------- END CONSTUCTORS -------------------------
 
 	/**
 	 * If multiple Items are found, the user is asked to select a single item from
@@ -287,8 +284,7 @@ public class Room {
 				for (Item i : matches) {
 					i.printItem();
 				}
-				String specific = UserInput.get("What item would you like (Press enter to cancel)")
-						.trim();
+				String specific = UserInput.get("What item would you like (Press enter to cancel)").trim();
 				if (specific.equals("")) {
 					return null;
 				}
@@ -306,6 +302,8 @@ public class Room {
 			return null;
 		}
 	}
+
+	// ------------------------- END CONSTUCTORS -------------------------
 
 	/**
 	 * Get a room based on direction relative to this room. Returns {@code null} if
@@ -336,11 +334,13 @@ public class Room {
 	 * Prints all items in the Room
 	 */
 	public void printItems () {
+		System.out.println("In the room there is:");
 		ArrayList<Item> mixedItems = new ArrayList<>();
 		mixedItems.addAll(itemsInArea);
 		mixedItems.addAll(backgroundItems);
 		Collections.shuffle(mixedItems);
 		for (Item i : mixedItems) {
+			System.out.print("\t");
 			i.printItem();
 		}
 	}
@@ -349,14 +349,21 @@ public class Room {
 	 * Prints room name and description
 	 */
 	public void printRoom () {
-		System.out.println("You are in a " + description + " " + name);
+		if (!description.equals("")) {
+			description += " ";
+		}
+		System.out.println("You are in a " + description + name + ".");
+	}
+
+	public boolean removeItem (Item itemToRemove) {
+		return itemsInArea.remove(itemToRemove);
 	}
 
 	public void setCardinalDirections (Room n, Room e, Room s, Room w) {
-		directions.put("north", n);
-		directions.put("east", e);
-		directions.put("south", s);
-		directions.put("west", w);
+		setDirection("north", n);
+		setDirection("east", e);
+		setDirection("south", s);
+		setDirection("west", w);
 	}
 
 	/**
@@ -368,19 +375,57 @@ public class Room {
 	 *            Room to move to
 	 */
 	public void setDirection (String d, Room room) {
-		directions.put(CommandParser.replaceDirection(d), room);
+		if (room != null) {
+			String dir = CommandParser.replaceDirection(d);
+			directions.put(dir, room);
+			if (room.getDirections().containsValue(this)) {
+				return;
+			}
+			if (dir.equals("north")) {
+				room.setDirection("south", this);
+			}
+			if (dir.equals("east")) {
+				room.setDirection("west", this);
+			}
+			if (dir.equals("south")) {
+				room.setDirection("north", this);
+			}
+			if (dir.equals("west")) {
+				room.setDirection("east", this);
+			}
+			if (dir.equals("northeast")) {
+				room.setDirection("southwest", this);
+			}
+			if (dir.equals("northwest")) {
+				room.setDirection("southeast", this);
+			}
+			if (dir.equals("southeast")) {
+				room.setDirection("northwest", this);
+			}
+			if (dir.equals("southwest")) {
+				room.setDirection("northeast", this);
+			}
+			if (dir.equals("up")) {
+				room.setDirection("down", this);
+			}
+			if (dir.equals("down")) {
+				room.setDirection("up", this);
+			}
+		} else {
+			unsetDirection(d);
+		}
 	}
 
 	public void setSecondaryDirections (Room ne, Room nw, Room se, Room sw) {
-		directions.put("northeast", ne);
-		directions.put("northwest", nw);
-		directions.put("southeast", se);
-		directions.put("southwest", sw);
+		setDirection("northeast", ne);
+		setDirection("northwest", nw);
+		setDirection("southeast", se);
+		setDirection("southwest", sw);
 	}
 
 	public void setVerticalDirections (Room u, Room d) {
-		directions.put("up", u);
-		directions.put("down", d);
+		setDirection("up", u);
+		setDirection("down", d);
 	}
 
 	public void unsetDirection (String d) {
@@ -416,7 +461,7 @@ public class Room {
 		return new ArrayList<>();
 	}
 
-	public boolean removeItem (Item itemToRemove) {
-		return itemsInArea.remove(itemToRemove);
+	private void runOnInit () {
+		directions = new HashMap<>();
 	}
 }

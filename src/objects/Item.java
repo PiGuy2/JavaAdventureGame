@@ -28,7 +28,6 @@ public class Item {
 		this.description = description;
 		this.isInteractive = isInteractive;
 	}
-	
 
 	/**
 	 * Gets the description of the Item
@@ -62,7 +61,11 @@ public class Item {
 	 * {@code (Item name)}.
 	 */
 	public void printItem () {
-		System.out.println("A " + description + " " + name + ".");
+		String printDescription = new String(description);
+		if (!description.equals("")) {
+			printDescription += " ";
+		}
+		System.out.println("A " + printDescription + name + ".");
 	}
 
 	/**

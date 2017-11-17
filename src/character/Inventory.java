@@ -38,17 +38,17 @@ public class Inventory {
 		return items;
 	}
 
+	public void printAll () {
+		for (Item i : items) {
+			i.printItem();
+		}
+	}
+
 	/**
 	 * removes item from arraylsit
 	 * 
 	 */
 	public void removeItem (InteractiveItem interactiveItem) {
 		items.remove(interactiveItem);
-	}
-
-	public void printAll () {
-		for (Item i : items) {
-			i.printItem();
-		}
 	}
 }

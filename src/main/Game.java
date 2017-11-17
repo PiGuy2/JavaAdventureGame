@@ -46,8 +46,7 @@ public class Game {
 				String [] cmdArgs = Arrays.copyOfRange(cmd.split(" "), 1, cmd.split(" ").length);
 				if (cmdAction.equals("look")) {
 					if (cmdArgs.length == 0) {
-						currentRoom.printAll();
-						currentRoom.printItems();
+						look();
 					} else {
 						if (cmdArgs[0].equals("at")) {
 							cmdArgs = Arrays.copyOfRange(cmdArgs, 2, cmdArgs.length);
@@ -61,7 +60,7 @@ public class Game {
 							System.out.println("You cannot move " + i);
 						} else {
 							currentRoom = possCurrentRoom;
-							System.out.println("Room changed");
+							look();
 						}
 					}
 				} else if (cmdAction.equals("take")) {
@@ -71,6 +70,10 @@ public class Game {
 							// item doesn't exist
 						} else if (itemToTake.getClass().equals(InteractiveItem.class)) {
 							Player.inventory.addItem((InteractiveItem) itemToTake);
+							currentRoom.removeItem(itemToTake);
+							String itemName = itemToTake.getName().substring(0, 1).toUpperCase()
+									+ itemToTake.getName().substring(1);
+							System.out.println(itemName + " taken.");
 						} else {
 							System.out.println("You cannot take that item");
 						}
@@ -107,11 +110,16 @@ public class Game {
 				} else if (cmdAction.equals("quit")) {
 					break mainloop;
 				} else {
-					System.out.println("\"" + cmd + "\" is not a valid command, because " + "\""
-							+ cmdAction + "\" is not a valid action yet.");
+					System.out.println("\"" + cmd + "\" is not a valid command, because " + "\"" + cmdAction
+							+ "\" is not a valid action yet.");
 				}
 			}
 		}
 		return true;
+	}
+
+	private void look () {
+		currentRoom.printAll();
+		currentRoom.printItems();
 	}
 }
