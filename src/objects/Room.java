@@ -66,7 +66,8 @@ public class Room {
 	 *            {@link BackgroundItem#BackgroundItem(String, String) background
 	 *            items}
 	 */
-	public Room (ArrayList<InteractiveItem> itemsInArea, ArrayList<BackgroundItem> backgroundItems) {
+	public Room (ArrayList<InteractiveItem> itemsInArea,
+			ArrayList<BackgroundItem> backgroundItems) {
 		name = "";
 		description = "";
 		extDescription = "";
@@ -107,7 +108,8 @@ public class Room {
 		runOnInit();
 	}
 
-	public Room (String name, ArrayList<InteractiveItem> itemsInArea, ArrayList<BackgroundItem> backgroundItems) {
+	public Room (String name, ArrayList<InteractiveItem> itemsInArea,
+			ArrayList<BackgroundItem> backgroundItems) {
 		this.name = name;
 		description = "";
 		extDescription = "";
@@ -217,7 +219,8 @@ public class Room {
 	 * @param extDescription
 	 *            is printed on a new line after the name and description
 	 */
-	public Room (String name, String description, String extDescription, ArrayList<InteractiveItem> itemsInArea) {
+	public Room (String name, String description, String extDescription,
+			ArrayList<InteractiveItem> itemsInArea) {
 		this.name = name;
 		this.description = description;
 		this.extDescription = extDescription;
@@ -240,8 +243,8 @@ public class Room {
 	 * @param extDescription
 	 *            is printed on a new line after the name and description
 	 */
-	public Room (String name, String description, String extDescription, ArrayList<InteractiveItem> itemsInArea,
-			ArrayList<BackgroundItem> backgroundItems) {
+	public Room (String name, String description, String extDescription,
+			ArrayList<InteractiveItem> itemsInArea, ArrayList<BackgroundItem> backgroundItems) {
 		this.name = name;
 		this.description = description;
 		this.extDescription = extDescription;
@@ -284,7 +287,8 @@ public class Room {
 				for (Item i : matches) {
 					i.printItem();
 				}
-				String specific = UserInput.get("What item would you like (Press enter to cancel)").trim();
+				String specific = UserInput.get("What item would you like (Press enter to cancel)")
+						.trim();
 				if (specific.equals("")) {
 					return null;
 				}
@@ -410,5 +414,9 @@ public class Room {
 			}
 		}
 		return new ArrayList<>();
+	}
+
+	public boolean removeItem (Item itemToRemove) {
+		return itemsInArea.remove(itemToRemove);
 	}
 }

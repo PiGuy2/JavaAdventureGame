@@ -2,6 +2,9 @@ package main;
 
 import java.util.Arrays;
 
+import character.Player;
+import objects.InteractiveItem;
+import objects.Item;
 import objects.Room;
 
 /**
@@ -62,7 +65,16 @@ public class Game {
 						}
 					}
 				} else if (cmdAction.equals("take")) {
-					System.out.println("cmd: take");
+					for (String i : cmdArgs) {
+						Item itemToTake = currentRoom.getItem(i);
+						if (itemToTake == null) {
+							// item doesn't exist
+						} else if (itemToTake.getClass().equals(InteractiveItem.class)) {
+							Player.inventory.addItem((InteractiveItem) itemToTake);
+						} else {
+							System.out.println("You cannot take that item");
+						}
+					}
 				} else if (cmdAction.equals("use")) {
 					System.out.println("cmd: use");
 				} else if (cmdAction.equals("break")) {
@@ -89,11 +101,14 @@ public class Game {
 					System.out.println("cmd: wear");
 				} else if (cmdAction.equals("equip")) {
 					System.out.println("cmd: equip");
+				} else if (cmdAction.equals("inventory")) {
+					System.out.println("You have:");
+					Player.inventory.printAll();
 				} else if (cmdAction.equals("quit")) {
 					break mainloop;
 				} else {
-					System.out.println("\"" + cmd + "\" is not a valid command, because " + "\"" + cmdAction
-							+ "\" is not a valid action yet.");
+					System.out.println("\"" + cmd + "\" is not a valid command, because " + "\""
+							+ cmdAction + "\" is not a valid action yet.");
 				}
 			}
 		}
