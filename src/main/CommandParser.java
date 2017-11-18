@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class CommandParser {
 	private static HashMap<String, String> cmdSubstitutions = new HashMap<String, String>();
-	private static HashMap<String, String> dirSubstitutions = new HashMap<String, String>();
+	public static HashMap<String, String> dirSubstitutions = new HashMap<String, String>();
 	private static HashMap<String, String> fullSubstitutions = new HashMap<String, String>();
 	private static HashMap<String, String> substitutions = new HashMap<String, String>();
 

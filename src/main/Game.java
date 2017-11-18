@@ -40,6 +40,7 @@ public class Game {
 	// go n nw south-east se; walk west n; help & crawl sw d down u
 	// t red; t trench; take dagger; l; i; dr red; l; i
 	public boolean runGame () {
+		look();
 		mainloop: while (true) {
 			String wholeCmd = UserInput.get("What would you like to do");
 			for (String cmd : wholeCmd.split("[;&]")) {
@@ -56,6 +57,9 @@ public class Game {
 						System.out.println("You can't look at things");
 					}
 				} else if (cmdAction.equals("go")) {
+					if (cmdArgs.length == 0) {
+						System.out.println("You must specify a direction to move.");
+					}
 					for (String i : cmdArgs) {
 						Room possCurrentRoom = currentRoom.getRoomFromDir(i);
 						if (possCurrentRoom == null) {
@@ -86,17 +90,18 @@ public class Game {
 					System.out.println("cmd: break");
 				} else if (cmdAction.equals("help")) {
 					System.out.println("Help:");
-					String help = "To use a command type the command (or the shortcut) and then the arguments" // cont.
+					String help = "To use a command, type the command (or the shortcut) and then the arguments" // cont.
 							+ " as shown in brackets on the following list. &&" + "You can move different directions " // cont.
 							+ "by using the \"go\" command, or by simply typing an abbreviation for a dircection, " // cont.
-							+ "such as \"n\" or \"sw\". &&" + "Commands (shortcut) [format] &&"
-							+ "\tLook (l) [look]: show room information and list items in the current room &&"
-							+ "\tGo (g)  [drop {direction or shortcut north, n, northeast, north-east, ne, etc.}]: " // cont.
-							+ "move to a different room &&" + "\tInventory (i) [inventory]: list items in inventory &&"
-							+ "\tTake (t) [take {item name}]: take an item in the room, moving it to your inventory &&"
-							+ "\tDrop (dr) [drop {item name}]: drop an item from your inventory &&"
-							+ "\tQuit (q) [quit]: quit the game";
-					for (String i : help.replaceAll(" && ", " &&").split(" &&")) {
+							+ "such as \"n\" or \"sw\". &&" + "Commands (shortcut) [format]: &&"
+							+ "\tLook (l) [look] -  show room information and list items in the current room &&"
+							+ "\tGo (g)  [go {direction or shortcut, such as north, n, northeast, north-east, ne, etc.} " // cont.
+							+ "{additional directions can be added, ex. \"go n ne west s\"}] -  move to a different room &&"
+							+ "\tInventory (i) [inventory] -  list items in inventory &&"
+							+ "\tTake (t) [take {item name}] -  take an item in the room, moving it to your inventory &&"
+							+ "\tDrop (dr) [drop {item name}] -  drop an item from your inventory &&"
+							+ "\tQuit (q) [quit] -  quit the game";
+					for (String i : help.replaceAll("&& ", "&&").split(" &&")) {
 						System.out.println("\t" + i);
 					}
 				} else if (cmdAction.equals("type")) {

@@ -12,7 +12,7 @@ public class Main {
 	 */
 	public static void main (String [] args) {
 		while (true) {
-			System.out.println("Enter 'help' for instructions.");
+			System.out.println("Enter 'help' (or 'h') for instructions.");
 			Room startRoom = RoomInit.makeRooms();
 			Game game = new Game(startRoom);
 			boolean win = game.runGame();

@@ -298,20 +298,44 @@ public class Room {
 	public void printAll () {
 		printRoom();
 		System.out.println(extDescription);
+		ArrayList<String> directionsToMove = new ArrayList<>();
+		for (String d : directions.keySet()) {
+			if (CommandParser.dirSubstitutions.containsValue(d)) {
+				directionsToMove.add(d);
+			}
+		}
+		if (directionsToMove.size() < 1) {
+			System.out.println("You can't move.");
+		} else if (directionsToMove.size() == 1) {
+			System.out.println("You can move " + directionsToMove.get(0) + ".");
+		} else if (directionsToMove.size() == 2) {
+			System.out.println("You can move " + directionsToMove.get(0) + " and " + directionsToMove.get(1) + ".");
+		} else {
+			System.out.print("You can move ");
+			String lastDirection = directionsToMove.remove(directionsToMove.size() - 1);
+			for (String i : directionsToMove) {
+				System.out.print(i + ", ");
+			}
+			System.out.println("and " + lastDirection + ".");
+		}
 	}
 
 	/**
 	 * Prints all items in the Room
 	 */
 	public void printItems () {
-		System.out.println("In the room there is:");
-		ArrayList<Item> mixedItems = new ArrayList<>();
-		mixedItems.addAll(itemsInArea);
-		mixedItems.addAll(backgroundItems);
-		Collections.shuffle(mixedItems);
-		for (Item i : mixedItems) {
-			System.out.print("\t");
-			i.printItem();
+		if (itemsInArea.size() > 0 || backgroundItems.size() > 0) {
+			System.out.println("In the room there is:");
+			ArrayList<Item> mixedItems = new ArrayList<>();
+			mixedItems.addAll(itemsInArea);
+			mixedItems.addAll(backgroundItems);
+			Collections.shuffle(mixedItems);
+			for (Item i : mixedItems) {
+				System.out.print("\t");
+				i.printItem();
+			}
+		} else {
+			System.out.println("There are no items in the room.");
 		}
 	}
 
@@ -345,45 +369,53 @@ public class Room {
 	 *            Room to move to
 	 */
 	public void setDirection (String d, Room room) {
-		if (room != null) {
+		if (setDirectionSimple(d, room)) {
 			String dir = CommandParser.replaceDirection(d);
-			directions.put(dir, room);
-			if (room.getDirections().containsValue(this)) {
+			if (room.equals(this)) {
 				return;
 			}
 			if (dir.equals("north")) {
-				room.setDirection("south", this);
+				room.setDirectionSimple("south", this);
 			}
 			if (dir.equals("east")) {
-				room.setDirection("west", this);
+				room.setDirectionSimple("west", this);
 			}
 			if (dir.equals("south")) {
-				room.setDirection("north", this);
+				room.setDirectionSimple("north", this);
 			}
 			if (dir.equals("west")) {
-				room.setDirection("east", this);
+				room.setDirectionSimple("east", this);
 			}
 			if (dir.equals("northeast")) {
-				room.setDirection("southwest", this);
+				room.setDirectionSimple("southwest", this);
 			}
 			if (dir.equals("northwest")) {
-				room.setDirection("southeast", this);
+				room.setDirectionSimple("southeast", this);
 			}
 			if (dir.equals("southeast")) {
-				room.setDirection("northwest", this);
+				room.setDirectionSimple("northwest", this);
 			}
 			if (dir.equals("southwest")) {
-				room.setDirection("northeast", this);
+				room.setDirectionSimple("northeast", this);
 			}
 			if (dir.equals("up")) {
-				room.setDirection("down", this);
+				room.setDirectionSimple("down", this);
 			}
 			if (dir.equals("down")) {
-				room.setDirection("up", this);
+				room.setDirectionSimple("up", this);
 			}
 		} else {
 			unsetDirection(d);
 		}
+	}
+
+	public boolean setDirectionSimple (String d, Room room) {
+		if (room != null) {
+			String dir = CommandParser.replaceDirection(d);
+			directions.put(dir, room);
+			return true;
+		}
+		return false;
 	}
 
 	public void setSecondaryDirections (Room ne, Room nw, Room se, Room sw) {

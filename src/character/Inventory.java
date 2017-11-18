@@ -39,10 +39,14 @@ public class Inventory {
 	}
 
 	public void printAll () {
-		System.out.println("You have:");
-		for (Item i : items) {
-			System.out.print("\t");
-			i.printItem();
+		if (items.size() > 0) {
+			System.out.println("You have:");
+			for (Item i : items) {
+				System.out.print("\t");
+				i.printItem();
+			}
+		} else {
+			System.out.println("You have no items.");
 		}
 	}
 

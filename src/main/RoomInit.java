@@ -24,16 +24,15 @@ public class RoomInit {
 		ArrayList<BackgroundItem> drOfficeBackgroundItems = new ArrayList<>(
 				Arrays.asList(new BackgroundItem("desk", "large"), new BackgroundItem("chair", "comfy"),
 						new BackgroundItem("shelf", "book"), new BackgroundItem("box", "wooden cigar")));
-		Room DrOffice = new Room("doctor's office", "",
+		Room drOffice = new Room("doctor's office", "",
 				"The room is white with windows all around, yet the room seems dark.", drOfficeInteractiveItems,
 				drOfficeBackgroundItems);
 		// -----
-		ArrayList<InteractiveItem> factorySInteractiveItems = new ArrayList<>(Arrays.asList(new InteractiveItem("", ""),
-				new InteractiveItem("", ""), new InteractiveItem("", ""), new InteractiveItem("", ""),
-				new InteractiveItem("", ""), new InteractiveItem("", ""), new InteractiveItem("", "")));
-		ArrayList<BackgroundItem> factorySBackgroundItems = new ArrayList<>(Arrays.asList(new BackgroundItem("", ""),
-				new BackgroundItem("", ""), new BackgroundItem("", ""), new BackgroundItem("", "")));
-		Room factoryS = new Room("roomName", "", "extDesricption", factorySInteractiveItems, factorySBackgroundItems);
+		ArrayList<InteractiveItem> factorySInteractiveItems = new ArrayList<>(
+				Arrays.asList(new InteractiveItem("item", "test")));
+		ArrayList<BackgroundItem> factorySBackgroundItems = new ArrayList<>(
+				Arrays.asList(new BackgroundItem("item", "example")));
+		Room factoryS = new Room("factory", "", "It is cold.", factorySInteractiveItems, factorySBackgroundItems);
 		// ___________
 
 		// ArrayList<InteractiveItem> InteractiveItems = new ArrayList<>(Arrays.asList(
@@ -48,8 +47,11 @@ public class RoomInit {
 		// "extDesricption",
 		// InteractiveItems, BackgroundItems);
 
-		factoryS.setDirection("s", DrOffice);
+		factoryS.setDirection("s", drOffice);
+		drOffice.setDirection("ne", factoryS);
+		drOffice.setDirection("se", drOffice);
+		drOffice.setDirection("w", drOffice);
 
-		return DrOffice;
+		return drOffice;
 	}
 }
