@@ -85,8 +85,20 @@ public class Game {
 					// TODO "break" command
 					System.out.println("cmd: break");
 				} else if (cmdAction.equals("help")) {
-					// TODO "help" command
-					System.out.println("cmd: help");
+					System.out.println("Help:");
+					String help = "To use a command type the command (or the shortcut) and then the arguments" // cont.
+							+ " as shown in brackets on the following list. &&" + "You can move different directions " // cont.
+							+ "by using the \"go\" command, or by simply typing an abbreviation for a dircection, " // cont.
+							+ "such as \"n\" or \"sw\". &&" + "Commands (shortcut) [format] &&"
+							+ "\tLook (l) [look]: show room information and list items in the current room &&"
+							+ "\tGo (g)  [drop {direction or shortcut north, n, northeast, north-east, ne, etc.}]: " // cont.
+							+ "move to a different room &&" + "\tInventory (i) [inventory]: list items in inventory &&"
+							+ "\tTake (t) [take {item name}]: take an item in the room, moving it to your inventory &&"
+							+ "\tDrop (dr) [drop {item name}]: drop an item from your inventory &&"
+							+ "\tQuit (q) [quit]: quit the game";
+					for (String i : help.replaceAll(" && ", " &&").split(" &&")) {
+						System.out.println("\t" + i);
+					}
 				} else if (cmdAction.equals("type")) {
 					// TODO find out what the "type" command is
 					System.out.println("cmd: type");

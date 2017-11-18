@@ -41,6 +41,7 @@ public class CommandParser {
 		cmdSubstitutions.put("t", "take");
 		cmdSubstitutions.put("g", "go");
 		cmdSubstitutions.put("dr", "drop");
+		cmdSubstitutions.put("h", "help");
 
 		/*
 		 * full substitutions only replace if the whole command given equals
