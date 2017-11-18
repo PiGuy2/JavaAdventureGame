@@ -39,16 +39,23 @@ public class Inventory {
 	}
 
 	public void printAll () {
+		System.out.println("You have:");
 		for (Item i : items) {
+			System.out.print("\t");
 			i.printItem();
 		}
 	}
 
 	/**
-	 * removes item from arraylsit
+	 * removes item from the Inventory
 	 * 
 	 */
 	public void removeItem (InteractiveItem interactiveItem) {
 		items.remove(interactiveItem);
+	}
+
+	public InteractiveItem getItem (String param) {
+		ArrayList<Item> itemsToSearch = new ArrayList<>(items);
+		return (InteractiveItem) Item.getItem(itemsToSearch, param);
 	}
 }

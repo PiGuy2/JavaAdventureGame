@@ -18,25 +18,27 @@ public class Game {
 	private Room currentRoom;
 	private Room deathRoom;
 
+	private Item winItem;
+
 	/**
 	 * Constructor for objects of class Game
 	 */
 	public Game (Room startingRoom) {
 		canDie = false;
 		this.currentRoom = startingRoom;
+		init();
 	}
 
 	public Game (Room deathRoom, Room startingRoom) {
 		canDie = true;
 		this.deathRoom = deathRoom;
 		this.currentRoom = startingRoom;
+		init();
 	}
 
-	/*
-	 * look, go, take, use, break, help, type, move {item}, pull, press, remove,
-	 * shoot, kill, open, wear [coat], equip [dagger]
-	 */
-
+	// test:
+	// go n nw south-east se; walk west n; help & crawl sw d down u
+	// t red; t trench; take dagger; l; i; dr red; l; i
 	public boolean runGame () {
 		mainloop: while (true) {
 			String wholeCmd = UserInput.get("What would you like to do");
@@ -64,49 +66,68 @@ public class Game {
 						}
 					}
 				} else if (cmdAction.equals("take")) {
-					for (String i : cmdArgs) {
-						Item itemToTake = currentRoom.getItem(i);
-						if (itemToTake == null) {
-							// item doesn't exist
-						} else if (itemToTake.getClass().equals(InteractiveItem.class)) {
+					Item itemToTake = currentRoom.getItem(String.join(" ", cmdArgs));
+					if (itemToTake != null) {
+						String itemName = itemToTake.getDescription() + " " + itemToTake.getName();
+						itemName = itemName.substring(0, 1).toUpperCase() + itemName.substring(1);
+						if (itemToTake.getClass().equals(InteractiveItem.class)) {
 							Player.inventory.addItem((InteractiveItem) itemToTake);
-							currentRoom.removeItem(itemToTake);
-							String itemName = itemToTake.getName().substring(0, 1).toUpperCase()
-									+ itemToTake.getName().substring(1);
+							currentRoom.removeItem((InteractiveItem) itemToTake);
 							System.out.println(itemName + " taken.");
 						} else {
-							System.out.println("You cannot take that item");
+							System.out.println("You cannot take " + itemName.toLowerCase() + ".");
 						}
 					}
 				} else if (cmdAction.equals("use")) {
+					// TODO "use" command
 					System.out.println("cmd: use");
 				} else if (cmdAction.equals("break")) {
+					// TODO "break" command
 					System.out.println("cmd: break");
 				} else if (cmdAction.equals("help")) {
+					// TODO "help" command
 					System.out.println("cmd: help");
 				} else if (cmdAction.equals("type")) {
+					// TODO find out what the "type" command is
 					System.out.println("cmd: type");
 				} else if (cmdAction.equals("move")) {
+					// TODO "move" command
 					System.out.println("cmd: move");
 				} else if (cmdAction.equals("pull")) {
+					// TODO "pull" command
 					System.out.println("cmd: pull");
 				} else if (cmdAction.equals("press")) {
+					// TODO "press" command
 					System.out.println("cmd: press");
 				} else if (cmdAction.equals("remove")) {
+					// TODO find out what the "remove" command is
 					System.out.println("cmd: remove");
 				} else if (cmdAction.equals("shoot")) {
+					// TODO "shoot" command
 					System.out.println("cmd: shoot");
 				} else if (cmdAction.equals("kill")) {
+					// TODO "kill" command
 					System.out.println("cmd: kill");
 				} else if (cmdAction.equals("open")) {
+					// TODO "open" command
 					System.out.println("cmd: open");
 				} else if (cmdAction.equals("wear")) {
+					// TODO find out what the "wear" command is
 					System.out.println("cmd: wear");
 				} else if (cmdAction.equals("equip")) {
+					// TODO "equip" command
 					System.out.println("cmd: equip");
 				} else if (cmdAction.equals("inventory")) {
-					System.out.println("You have:");
 					Player.inventory.printAll();
+				} else if (cmdAction.equals("drop")) {
+					InteractiveItem itemToDrop = Player.inventory.getItem(String.join(" ", cmdArgs));
+					if (itemToDrop != null) {
+						String itemName = itemToDrop.getDescription() + " " + itemToDrop.getName();
+						itemName = itemName.substring(0, 1).toUpperCase() + itemName.substring(1);
+						Player.inventory.removeItem(itemToDrop);
+						currentRoom.addItem(itemToDrop);
+						System.out.println(itemName + " taken.");
+					}
 				} else if (cmdAction.equals("quit")) {
 					break mainloop;
 				} else {
@@ -115,7 +136,19 @@ public class Game {
 				}
 			}
 		}
-		return true;
+		if (winItem == null) {
+			return false;
+		}
+		return Player.inventory.getItems().contains(winItem);
+	}
+
+	/*
+	 * look, go, take, use, break, help, type, move {item}, pull, press, remove,
+	 * shoot, kill, open, wear [coat], equip [dagger]
+	 */
+
+	private void init () {
+		winItem = currentRoom.getItem("dagger");
 	}
 
 	private void look () {

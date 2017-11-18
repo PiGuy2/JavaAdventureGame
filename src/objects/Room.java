@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashMap;
 
 import main.CommandParser;
-import main.UserInput;
 
 /**
  * @author Robby
@@ -265,45 +264,16 @@ public class Room {
 	 * @param param
 	 * @return Returns an {@link Item#Item(String, String, boolean) Item} that is
 	 *         found from the argument {@code param}. This function searches both
-	 *         the description and name of all InteractiveItems in the room. If the
-	 *         user presses {@code enter} when prompted to select an item,
-	 *         {@code null} is returned. {@code null} is returned if no items are
-	 *         found.
+	 *         the description and name of all Items in the room. If the user
+	 *         presses {@code enter} when prompted to select an item, {@code null}
+	 *         is returned. {@code null} is returned if no items are found.
 	 */
 	public Item getItem (String param) {
 		ArrayList<Item> area = new ArrayList<>();
 		area.addAll(itemsInArea);
 		area.addAll(backgroundItems);
-		Collections.shuffle(area);
-		ArrayList<Item> matches = getItemsFromList(area, param);
-		if (matches.size() == 1) {
-			return matches.get(0);
-		} else if (matches.size() > 1) {
-			while (true) {
-				System.out.println("Which Item are you talking about?");
-				for (Item i : matches) {
-					i.printItem();
-				}
-				String specific = UserInput.get("What item would you like (Press enter to cancel)").trim();
-				if (specific.equals("")) {
-					return null;
-				}
-				ArrayList<Item> matches2 = getItemsFromList(matches, specific);
-				if (matches2.size() == 1) {
-					return matches2.get(0);
-				} else if (matches2.size() < 1) {
-					System.out.println("That item doesn't exist");
-					return null;
-				}
-				matches = matches2;
-			}
-		} else {
-			System.out.println("That item doesn't exist");
-			return null;
-		}
+		return Item.getItem(area, param);
 	}
-
-	// ------------------------- END CONSTUCTORS -------------------------
 
 	/**
 	 * Get a room based on direction relative to this room. Returns {@code null} if
@@ -355,7 +325,7 @@ public class Room {
 		System.out.println("You are in a " + description + name + ".");
 	}
 
-	public boolean removeItem (Item itemToRemove) {
+	public boolean removeItem (InteractiveItem itemToRemove) {
 		return itemsInArea.remove(itemToRemove);
 	}
 
@@ -432,36 +402,16 @@ public class Room {
 		directions.remove(d);
 	}
 
-	private boolean checkItemNameMatch (Item item, String param) {
-		String check = item.getDescription() + " " + item.getName();
-		return check.contains(param);
-	}
-
-	private ArrayList<Item> getItemsFromList (ArrayList<Item> items, String param) {
-		ArrayList<Item> matches = new ArrayList<>();
-		for (int run = 0; run < 2; run++) {
-			for (Item i : items) {
-				if (run == 0) {
-					if (checkItemNameMatch(i, param)) {
-						matches.add(i);
-					}
-				} else {
-					for (String s : param.split(" ")) {
-						if (checkItemNameMatch(i, s)) {
-							matches.add(i);
-							break;
-						}
-					}
-				}
-			}
-			if (matches.size() > 0) {
-				return matches;
-			}
-		}
-		return new ArrayList<>();
-	}
-
 	private void runOnInit () {
 		directions = new HashMap<>();
 	}
+
+	public void addItem (InteractiveItem interactiveItem) {
+		itemsInArea.add(interactiveItem);
+	}
+
+	public void addItems (ArrayList<InteractiveItem> interactiveItems) {
+		itemsInArea.addAll(interactiveItems);
+	}
+
 }

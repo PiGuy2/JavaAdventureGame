@@ -38,6 +38,10 @@ public class CommandParser {
 		cmdSubstitutions.put("see", "look");
 		cmdSubstitutions.put("view", "look");
 
+		cmdSubstitutions.put("t", "take");
+		cmdSubstitutions.put("g", "go");
+		cmdSubstitutions.put("dr", "drop");
+
 		/*
 		 * full substitutions only replace if the whole command given equals
 		 * 
@@ -46,6 +50,7 @@ public class CommandParser {
 		 */
 		fullSubstitutions.put("l", "look");
 		fullSubstitutions.put("i", "inventory");
+		fullSubstitutions.put("q", "quit");
 
 		/*
 		 * full substitutions only replace if the whole command given equals
@@ -63,9 +68,6 @@ public class CommandParser {
 		dirSubstitutions.put("se", "southeast");
 		dirSubstitutions.put("sw", "southwest");
 	}
-
-	// test:
-	// go n nw south-east se; walk west n; help & crawl sw d down u
 
 	/*
 	 * look (see, view, look at), go (walk run crawl sprint jog), take (grab get),
