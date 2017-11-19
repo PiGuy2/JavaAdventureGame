@@ -6,9 +6,14 @@ import objects.InteractiveItem;
 import objects.Item;
 
 /**
+ * Class to store an ArrayList of items in the inventory of the
+ * {@link Player#Player() player} or of an {@link NPC#NPC() NPC}. Includes
+ * function to add and remove items from the inventory, as well as to find an
+ * item in the inventory based on user input.
+ * 
  * @author Cole
  * @author Owen
- *
+ * @author Robby
  */
 public class Inventory {
 	private ArrayList<InteractiveItem> items;

@@ -1,13 +1,13 @@
 package objects;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  * @author Robby
  * 
  */
 public class InteractiveItem extends Item {
-	private HashMap<String, String> commands;
+	private ArrayList<String> commands;
 
 	/**
 	 * Create a new interactive item object
@@ -20,6 +20,6 @@ public class InteractiveItem extends Item {
 	 */
 	public InteractiveItem (String name, String description) {
 		super(name, description, true);
-		commands = new HashMap<>();
+		commands = new ArrayList<>();
 	}
 }

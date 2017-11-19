@@ -8,8 +8,8 @@ import objects.Item;
 import objects.Room;
 
 /**
- * This is the main game class. The function {@link Game#Game.runGame()
- * runGame()} takes commands from the user repeatedly until the game ends.
+ * This is the main game class. The function {@link #runGame()} takes commands
+ * from the user repeatedly until the game ends.
  *
  * @author Robby
  */

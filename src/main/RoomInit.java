@@ -12,6 +12,7 @@ import objects.Room;
 
 /**
  * @author Owen
+ * @author Robby
  *
  */
 public class RoomInit {
