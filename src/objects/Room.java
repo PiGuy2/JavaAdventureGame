@@ -445,5 +445,4 @@ public class Room {
 	public void addItems (ArrayList<InteractiveItem> interactiveItems) {
 		itemsInArea.addAll(interactiveItems);
 	}
-
 }

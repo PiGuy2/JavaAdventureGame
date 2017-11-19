@@ -51,6 +51,8 @@ public class RoomInit {
 		drOffice.setDirection("ne", factoryS);
 		drOffice.setDirection("se", drOffice);
 		drOffice.setDirection("w", drOffice);
+		drOffice.setDirection("u", factoryS);
+		drOffice.setDirection("d", drOffice);
 
 		return drOffice;
 	}

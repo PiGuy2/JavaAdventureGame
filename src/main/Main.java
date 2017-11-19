@@ -17,8 +17,10 @@ public class Main {
 			Room startRoom = RoomInit.makeRooms();
 			Game game = new Game(startRoom);
 			boolean win = game.runGame();
-			System.out.print("You ");
-			System.out.println(win ? "won!" : "lost :(");
+			System.out.println("\n-------------------------");
+			System.out.print("       You ");
+			System.out.println(win ? "won! :)" : "lost :(");
+			System.out.println("-------------------------\n");
 			boolean quit = UserInput.getBool("Would you like to play again");
 			if (!quit) {
 				break;

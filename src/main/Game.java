@@ -92,24 +92,26 @@ public class Game {
 					// TODO "break" command
 					System.out.println("cmd: break");
 				} else if (cmdAction.equals("help")) {
-					/*
-					 * TODO add commands to help - equip equipped unequip
-					 * 
-					 * TODO improve help
-					 */
+					// TODO improve help
 					System.out.println("Help:");
-					String help = "To use a command, type the command (or the shortcut) and then the arguments" // cont.
-							+ " as shown in brackets on the following list. &&" + "You can move different directions " // cont.
-							+ "by using the \"go\" command, or by simply typing an abbreviation for a dircection, " // cont.
-							+ "such as \"n\" or \"sw\". &&" + "Commands (shortcut) [format]: &&"
-							+ "\tLook (l) [look] -  show room information and list items in the current room &&"
-							+ "\tGo (g)  [go {direction or shortcut, such as north, n, northeast, north-east, ne, etc.} " // cont.
-							+ "{additional directions can be added, ex. \"go n ne west s\"}] -  move to a different room &&"
-							+ "\tInventory (i) [inventory] -  list items in inventory &&"
-							+ "\tTake (t) [take {item name}] -  take an item in the room, moving it to your inventory &&"
-							+ "\tDrop (dr) [drop {item name}] -  drop an item from your inventory &&"
-							+ "\tQuit (q) [quit] -  quit the game";
-					for (String i : help.replaceAll("&& ", "&&").split(" &&")) {
+					String [] help = {
+							"To use a command, type the command (or the shortcut) and then the arguments as shown in "
+									+ "brackets on the following list.",
+							"You can move different directions by using the \"go\" command, or by simply typing an "
+									+ "abbreviation for a direction, such as \"n\" or \"sw\".",
+							"\tYou can also move up and down, and use the shortcuts \"u\" and \"d\".", "",
+							"Commands (shortcut) [format]:",
+							"\tLook (l) [look] -  show room information and list items in the current room",
+							"\tGo (g)  [go {direction or shortcut, such as north, n, northeast, north-east, ne, etc.} "
+									+ "{additional directions can be added, ex. \"go n ne west s\"}] -  move to a "
+									+ "different room",
+							"\tInventory (i) [inventory] -  list items in inventory",
+							"\tTake (t) [take {item name}] -  take an item in the room, moving it to your inventory",
+							"\tDrop (dr) [drop {item name}] -  drop an item from your inventory",
+							"\tEquip (eq) [equip {item name}] - equip an item from your inventory",
+							"\tUnquip (ueq) [unequip {item name}] - unequip an item and move it to your inventory",
+							"\tEquipped (eqd) [equipped] - list equipped items", "\tQuit (q) [quit] -  quit the game"};
+					for (String i : help) {
 						System.out.println("\t" + i);
 					}
 				} else if (cmdAction.equals("type")) {
