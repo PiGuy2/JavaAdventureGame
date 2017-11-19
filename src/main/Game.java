@@ -115,10 +115,10 @@ public class Game {
 						System.out.println("\t" + i);
 					}
 				} else if (cmdAction.equals("type")) {
-					// TODO find out what the "type" command is
+					// TODO find out what the "type" command does
 					System.out.println("cmd: type");
 				} else if (cmdAction.equals("move")) {
-					// TODO "move" command
+					// TODO find out what the "move" command does
 					System.out.println("cmd: move");
 				} else if (cmdAction.equals("pull")) {
 					// TODO "pull" command
@@ -127,7 +127,7 @@ public class Game {
 					// TODO "press" command
 					System.out.println("cmd: press");
 				} else if (cmdAction.equals("remove")) {
-					// TODO find out what the "remove" command is
+					// TODO find out what the "remove" command does
 					System.out.println("cmd: remove");
 				} else if (cmdAction.equals("shoot")) {
 					// TODO "shoot" command
