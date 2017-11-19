@@ -42,6 +42,10 @@ public class CommandParser {
 		cmdSubstitutions.put("g", "go");
 		cmdSubstitutions.put("dr", "drop");
 		cmdSubstitutions.put("h", "help");
+		cmdSubstitutions.put("eq", "equip");
+		cmdSubstitutions.put("eqd", "equipped");
+		cmdSubstitutions.put("un-equip", "unequip");
+		cmdSubstitutions.put("ueq", "unequip");
 
 		/*
 		 * full substitutions only replace if the whole command given equals

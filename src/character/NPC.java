@@ -6,6 +6,6 @@ package character;
  */
 public class NPC {
 	public NPC () {
-		// TODO Auto-generated constructor stub
+		// TODO Auto-generated constructor stub for NPCs
 	}
 }

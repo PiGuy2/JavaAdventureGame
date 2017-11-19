@@ -17,7 +17,6 @@ public class Inventory {
 		this.items = new ArrayList<>();
 	}
 
-	// TODO docs
 	public Inventory (ArrayList<InteractiveItem> items) {
 		this.items = items;
 	}
@@ -33,7 +32,6 @@ public class Inventory {
 		items.addAll(interactiveItems);
 	}
 
-	// TODO docs
 	public ArrayList<InteractiveItem> getItems () {
 		return items;
 	}

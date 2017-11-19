@@ -59,7 +59,7 @@ public class Item {
 	 *         presses {@code enter} when prompted to select an item, {@code null}
 	 *         is returned. {@code null} is returned if no items are found.
 	 */
-	public static Item getItem (ArrayList<Item> items, String param) {
+	public static Item getItem (ArrayList<? extends Item> items, String param) {
 		ArrayList<Item> area = new ArrayList<>(items);
 		Collections.shuffle(area);
 		ArrayList<Item> matches = getItemsFromList(area, param);
