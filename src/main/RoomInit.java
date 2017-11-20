@@ -33,30 +33,25 @@ public class RoomInit {
 				new InteractiveItem("card", "ace of hearts"), new InteractiveItem("can", "trash"),
 				new InteractiveItem("painting", "large"), new InteractiveItem("notebook", "blue"),
 				new InteractiveItem("lock", "pink"), new InteractiveItem("key", "pink")));
-		ArrayList<BackgroundItem> factorySBackgroundItems = new ArrayList<>(
-				Arrays.asList(new BackgroundItem("item", "example"), new BackgroundItem("window")));
-		Room factoryS = new Room("factory", "", "It is cold.", factorySInteractiveItems,
+		ArrayList<BackgroundItem> factorySBackgroundItems = new ArrayList<>(Arrays
+				.asList(new BackgroundItem("painting", "small"), new BackgroundItem("window")));
+		Room factoryS = new Room("Factory S", "", "It is cold.", factorySInteractiveItems,
 				factorySBackgroundItems);
-		// ___________
+		// -----
+		ArrayList<InteractiveItem> factoryTInteractiveItems = new ArrayList<>(
+				Arrays.asList(new InteractiveItem("", ""), new InteractiveItem("", ""),
+						new InteractiveItem("", ""), new InteractiveItem("", ""),
+						new InteractiveItem("", ""), new InteractiveItem("", ""),
+						new InteractiveItem("", "")));
+		ArrayList<BackgroundItem> factoryTBackgroundItems = new ArrayList<>(
+				Arrays.asList(new BackgroundItem("", ""), new BackgroundItem("", ""),
+						new BackgroundItem("", ""), new BackgroundItem("", "")));
+		Room factoryT = new Room("Factory T", "", "This room is extremely hot.",
+				factoryTInteractiveItems, factoryTBackgroundItems);
+		// -----
+		Room hallWay = new Room("Hallway", "long white");
 
-		// ArrayList<InteractiveItem> InteractiveItems = new ArrayList<>(Arrays.asList(
-		// new InteractiveItem("", ""), new InteractiveItem("", ""),
-		// new InteractiveItem("", ""), new InteractiveItem("", ""),
-		// new InteractiveItem("", ""), new InteractiveItem("", ""),
-		// new InteractiveItem("", "")));
-		// ArrayList<BackgroundItem> BackgroundItems = new ArrayList<>(Arrays.asList(
-		// new BackgroundItem("", ""), new BackgroundItem("", ""),
-		// new BackgroundItem("", ""), new BackgroundItem("", "")));
-		// Room (room name) = new Room("roomName", "",
-		// "extDesricption",
-		// InteractiveItems, BackgroundItems);
-
-		factoryS.setDirection("s", drOffice);
-		drOffice.setDirection("ne", factoryS);
-		drOffice.setDirection("se", drOffice);
-		drOffice.setDirection("w", drOffice);
-		drOffice.setDirection("u", factoryS);
-		drOffice.setDirection("d", drOffice);
+		// drOffice.setDirection("d", drOffice);
 
 		return drOffice;
 	}
