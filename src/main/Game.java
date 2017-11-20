@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import character.Player;
@@ -18,7 +19,7 @@ public class Game {
 	private Room currentRoom;
 	private Room deathRoom;
 
-	private Item winItem;
+	private ArrayList<InteractiveItem> winItems;
 
 	/**
 	 * Constructor for objects of class Game
@@ -99,8 +100,8 @@ public class Game {
 									+ "brackets on the following list.",
 							"You can move different directions by using the \"go\" command, or by simply typing an "
 									+ "abbreviation for a direction, such as \"n\" or \"sw\".",
-							"\tYou can also move up and down, and use the shortcuts \"u\" and \"d\".", "",
-							"Commands (shortcut) [format]:",
+							"\tYou can also move up and down, and use the shortcuts \"u\" and \"d\".",
+							"", "Commands (shortcut) [format]:",
 							"\tLook (l) [look] -  show room information and list items in the current room",
 							"\tGo (g)  [go {direction or shortcut, such as north, n, northeast, north-east, ne, etc.} "
 									+ "{additional directions can be added, ex. \"go n ne west s\"}] -  move to a "
@@ -110,7 +111,8 @@ public class Game {
 							"\tDrop (dr) [drop {item name}] -  drop an item from your inventory",
 							"\tEquip (eq) [equip {item name}] - equip an item from your inventory",
 							"\tUnquip (ueq) [unequip {item name}] - unequip an item and move it to your inventory",
-							"\tEquipped (eqd) [equipped] - list equipped items", "\tQuit (q) [quit] -  quit the game"};
+							"\tEquipped (eqd) [equipped] - list equipped items",
+							"\tQuit (q) [quit] -  quit the game"};
 					for (String i : help) {
 						System.out.println("\t" + i);
 					}
@@ -143,9 +145,11 @@ public class Game {
 					System.out.println("cmd: wear");
 				} else if (cmdAction.equals("equip")) {
 					// Equips an item from the inventory
-					InteractiveItem itemToEquip = Player.inventory.getItem(String.join(" ", cmdArgs));
+					InteractiveItem itemToEquip = Player.inventory
+							.getItem(String.join(" ", cmdArgs));
 					if (itemToEquip != null) {
-						String itemName = itemToEquip.getDescription() + " " + itemToEquip.getName();
+						String itemName = itemToEquip.getDescription() + " "
+								+ itemToEquip.getName();
 						itemName = itemName.trim();
 						itemName = itemName.substring(0, 1).toUpperCase() + itemName.substring(1);
 						Player.inventory.removeItem(itemToEquip);
@@ -153,10 +157,11 @@ public class Game {
 						System.out.println(itemName + " equipped.");
 					}
 				} else if (cmdAction.equals("unequip")) {
-					InteractiveItem itemToUnequip = (InteractiveItem) Item.getItem(Player.equippedItems,
-							String.join(" ", cmdArgs));
+					InteractiveItem itemToUnequip = (InteractiveItem) Item
+							.getItem(Player.equippedItems, String.join(" ", cmdArgs));
 					if (itemToUnequip != null) {
-						String itemName = itemToUnequip.getDescription() + " " + itemToUnequip.getName();
+						String itemName = itemToUnequip.getDescription() + " "
+								+ itemToUnequip.getName();
 						itemName = itemName.trim();
 						itemName = itemName.substring(0, 1).toUpperCase() + itemName.substring(1);
 						Player.equippedItems.remove(itemToUnequip);
@@ -176,7 +181,8 @@ public class Game {
 						System.out.println("You have no items equipped.");
 					}
 				} else if (cmdAction.equals("drop")) {
-					InteractiveItem itemToDrop = Player.inventory.getItem(String.join(" ", cmdArgs));
+					InteractiveItem itemToDrop = Player.inventory
+							.getItem(String.join(" ", cmdArgs));
 					if (itemToDrop != null) {
 						String itemName = itemToDrop.getDescription() + " " + itemToDrop.getName();
 						itemName = itemName.trim();
@@ -188,15 +194,20 @@ public class Game {
 				} else if (cmdAction.equals("quit")) {
 					break mainloop;
 				} else {
-					System.out.println("\"" + cmd + "\" is not a valid command, because " + "\"" + cmdAction
-							+ "\" is not a valid action yet.");
+					System.out.println("\"" + cmd + "\" is not a valid command, because " + "\""
+							+ cmdAction + "\" is not a valid action yet.");
 				}
 			}
 		}
-		if (winItem == null) {
+		if (winItems == null) {
 			return false;
 		}
-		return Player.inventory.getItems().contains(winItem);
+		for (InteractiveItem i : winItems) {
+			if (!Player.inventory.getItems().contains(i)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/*
@@ -205,7 +216,8 @@ public class Game {
 	 */
 
 	private void init () {
-		winItem = currentRoom.getItem("dagger");
+		winItems = new ArrayList<>();
+		winItems.add((InteractiveItem) currentRoom.getItem("dagger"));
 	}
 
 	private void look () {

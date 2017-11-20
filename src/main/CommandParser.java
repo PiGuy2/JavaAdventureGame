@@ -3,6 +3,10 @@ package main;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Robby
+ *
+ */
 public class CommandParser {
 	private static HashMap<String, String> cmdSubstitutions = new HashMap<String, String>();
 	public static HashMap<String, String> dirSubstitutions = new HashMap<String, String>();
@@ -114,7 +118,8 @@ public class CommandParser {
 		singleSubs.putAll(dirSubstitutions);
 		for (Map.Entry<String, String> entry : singleSubs.entrySet()) {
 			// System.out.println(entry.getKey() + " --> " + entry.getValue());
-			newCommand = newCommand.replaceAll(" " + entry.getKey() + " ", " " + entry.getValue() + " ");
+			newCommand = newCommand.replaceAll(" " + entry.getKey() + " ",
+					" " + entry.getValue() + " ");
 			// System.out.println("\t1. " + newCommand);
 			if (newCommand.startsWith(entry.getKey() + " ")) {
 				newCommand = newCommand.replaceFirst(entry.getKey(), entry.getValue());
