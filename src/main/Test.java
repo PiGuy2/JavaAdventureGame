@@ -31,7 +31,7 @@ public class Test {
 		InteractiveItem sack6 = new InteractiveItem("sack", "blue plastic");
 		ArrayList<InteractiveItem> items = new ArrayList<>(Arrays.asList(egg, sack, sack2, sack3, sack4, sack5, sack6));
 		ArrayList<BackgroundItem> bItems = new ArrayList<>(Arrays.asList(tree, log, stick, bag, bag2, bag3));
-		Room test = new Room(items, bItems);
+		Room test = new Room("", "", items, bItems);
 		Item itemTest = test.getItem("sack");
 		if (itemTest == null) {
 			System.out.println("null");

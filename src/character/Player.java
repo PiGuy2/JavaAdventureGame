@@ -9,14 +9,15 @@ import objects.InteractiveItem;
  * equipped items}.
  *
  * @author Owen
+ * @author Robby
  */
 public class Player {
-	/**
-	 * The user's inventory
-	 */
-	public static Inventory inventory = new Inventory();
 	/**
 	 * An ArrayList of items the user has equipped.
 	 */
 	public static ArrayList<InteractiveItem> equippedItems = new ArrayList<InteractiveItem>();
+	/**
+	 * The user's inventory
+	 */
+	public static Inventory inventory = new Inventory();
 }

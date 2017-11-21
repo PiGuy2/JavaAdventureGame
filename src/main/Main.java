@@ -8,7 +8,10 @@ import objects.Room;
  */
 public class Main {
 	/**
+	 * Main method
+	 * 
 	 * @param args
+	 *            This is just so Eclipse is happy!
 	 */
 	public static void main (String [] args) {
 		while (true) {

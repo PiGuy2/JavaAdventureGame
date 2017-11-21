@@ -14,8 +14,8 @@ public class BackgroundItem extends Item {
 	 *            The description of the object. This is printed when {@code look}
 	 *            is run.
 	 */
-	public BackgroundItem (String name, String description) {
-		super(name, description, false);
+	public BackgroundItem (String name) {
+		this(name, "");
 	}
 
 	/**
@@ -27,7 +27,7 @@ public class BackgroundItem extends Item {
 	 *            The description of the object. This is printed when {@code look}
 	 *            is run.
 	 */
-	public BackgroundItem (String name) {
-		this(name, "");
+	public BackgroundItem (String name, String description) {
+		super(name, description, false);
 	}
 }

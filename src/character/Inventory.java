@@ -37,6 +37,15 @@ public class Inventory {
 		items.addAll(interactiveItems);
 	}
 
+	public boolean contains (InteractiveItem item) {
+		return items.contains(item);
+	}
+
+	public InteractiveItem getItem (String param) {
+		ArrayList<Item> itemsToSearch = new ArrayList<>(items);
+		return (InteractiveItem) Item.getItem(itemsToSearch, param);
+	}
+
 	public ArrayList<InteractiveItem> getItems () {
 		return items;
 	}
@@ -59,10 +68,5 @@ public class Inventory {
 	 */
 	public void removeItem (InteractiveItem interactiveItem) {
 		items.remove(interactiveItem);
-	}
-
-	public InteractiveItem getItem (String param) {
-		ArrayList<Item> itemsToSearch = new ArrayList<>(items);
-		return (InteractiveItem) Item.getItem(itemsToSearch, param);
 	}
 }

@@ -26,56 +26,7 @@ public class Room {
 	 * {@link character.NPC#NPC() NPCs} in the room
 	 */
 	public Room () {
-		name = "";
-		description = "";
-		extDescription = "";
-
-		itemsInArea = new ArrayList<>();
-		backgroundItems = new ArrayList<>();
-
-		runOnInit();
-	}
-
-	/**
-	 * Creates a {@code Room} object to store a list of
-	 * {@link Item#Item(String, String, boolean) items}, backgroundItems items, and
-	 * {@link character.NPC#NPC() NPCs} in the room
-	 * 
-	 * @param itemsInArea
-	 *            is an ArrayList of Items that are in the room
-	 */
-	public Room (ArrayList<InteractiveItem> itemsInArea) {
-		name = "";
-		description = "";
-		extDescription = "";
-
-		this.itemsInArea = itemsInArea;
-		backgroundItems = new ArrayList<>();
-
-		runOnInit();
-	}
-
-	/**
-	 * Creates a {@code Room} object to store a list of
-	 * {@link Item#Item(String, String, boolean) items}, backgroundItems items, and
-	 * {@link character.NPC#NPC() NPCs} in the room
-	 * 
-	 * @param itemsInArea
-	 *            is an ArrayList of Items that are in the room
-	 * @param backgroundItems
-	 *            is an ArrayList of
-	 *            {@link BackgroundItem#BackgroundItem(String, String) background
-	 *            items}
-	 */
-	public Room (ArrayList<InteractiveItem> itemsInArea, ArrayList<BackgroundItem> backgroundItems) {
-		name = "";
-		description = "";
-		extDescription = "";
-
-		this.itemsInArea = itemsInArea;
-		this.backgroundItems = backgroundItems;
-
-		runOnInit();
+		this("", "", "", new ArrayList<InteractiveItem>(), new ArrayList<BackgroundItem>());
 	}
 
 	/**
@@ -87,36 +38,19 @@ public class Room {
 	 *            is the name of the room
 	 */
 	public Room (String name) {
-		this.name = name;
-		description = "";
-		extDescription = "";
-
-		itemsInArea = new ArrayList<>();
-		backgroundItems = new ArrayList<>();
-
-		runOnInit();
+		this(name, "", "", new ArrayList<InteractiveItem>(), new ArrayList<BackgroundItem>());
 	}
 
+	/**
+	 * Creates a {@code Room} object to store a list of
+	 * {@link Item#Item(String, String, boolean) items} and
+	 * {@link character.NPC#NPC() NPCs} in the room
+	 * 
+	 * @param name
+	 *            is the name of the room
+	 */
 	public Room (String name, ArrayList<InteractiveItem> itemsInArea) {
-		this.name = name;
-		description = "";
-		extDescription = "";
-
-		this.itemsInArea = itemsInArea;
-		backgroundItems = new ArrayList<>();
-
-		runOnInit();
-	}
-
-	public Room (String name, ArrayList<InteractiveItem> itemsInArea, ArrayList<BackgroundItem> backgroundItems) {
-		this.name = name;
-		description = "";
-		extDescription = "";
-
-		this.itemsInArea = itemsInArea;
-		this.backgroundItems = backgroundItems;
-
-		runOnInit();
+		this(name, "", "", itemsInArea, new ArrayList<BackgroundItem>());
 	}
 
 	/**
@@ -130,14 +64,7 @@ public class Room {
 	 *            is the adjective or phrase printed before name
 	 */
 	public Room (String name, String description) {
-		this.name = name;
-		this.description = description;
-		extDescription = "";
-
-		itemsInArea = new ArrayList<>();
-		backgroundItems = new ArrayList<>();
-
-		runOnInit();
+		this(name, description, "", new ArrayList<InteractiveItem>(), new ArrayList<BackgroundItem>());
 	}
 
 	/**
@@ -151,14 +78,7 @@ public class Room {
 	 *            is the adjective or phrase printed before name
 	 */
 	public Room (String name, String description, ArrayList<InteractiveItem> itemsInArea) {
-		this.name = name;
-		this.description = description;
-		extDescription = "";
-
-		this.itemsInArea = itemsInArea;
-		backgroundItems = new ArrayList<>();
-
-		runOnInit();
+		this(name, description, "", itemsInArea, new ArrayList<BackgroundItem>());
 	}
 
 	/**
@@ -173,14 +93,7 @@ public class Room {
 	 */
 	public Room (String name, String description, ArrayList<InteractiveItem> itemsInArea,
 			ArrayList<BackgroundItem> backgroundItems) {
-		this.name = name;
-		this.description = description;
-		extDescription = "";
-
-		this.itemsInArea = itemsInArea;
-		this.backgroundItems = backgroundItems;
-
-		runOnInit();
+		this(name, description, "", itemsInArea, backgroundItems);
 	}
 
 	/**
@@ -196,14 +109,7 @@ public class Room {
 	 *            is printed on a new line after the name and description
 	 */
 	public Room (String name, String description, String extDescription) {
-		this.name = name;
-		this.description = description;
-		this.extDescription = extDescription;
-
-		itemsInArea = new ArrayList<>();
-		backgroundItems = new ArrayList<>();
-
-		runOnInit();
+		this(name, description, extDescription, new ArrayList<InteractiveItem>(), new ArrayList<BackgroundItem>());
 	}
 
 	/**
@@ -219,14 +125,7 @@ public class Room {
 	 *            is printed on a new line after the name and description
 	 */
 	public Room (String name, String description, String extDescription, ArrayList<InteractiveItem> itemsInArea) {
-		this.name = name;
-		this.description = description;
-		this.extDescription = extDescription;
-
-		this.itemsInArea = itemsInArea;
-		backgroundItems = new ArrayList<>();
-
-		runOnInit();
+		this(name, description, extDescription, itemsInArea, new ArrayList<BackgroundItem>());
 	}
 
 	/**
@@ -251,6 +150,14 @@ public class Room {
 		this.backgroundItems = backgroundItems;
 
 		runOnInit();
+	}
+
+	public void addItem (InteractiveItem interactiveItem) {
+		itemsInArea.add(interactiveItem);
+	}
+
+	public void addItems (ArrayList<InteractiveItem> interactiveItems) {
+		itemsInArea.addAll(interactiveItems);
 	}
 
 	public HashMap<String, Room> getDirections () {
@@ -436,13 +343,5 @@ public class Room {
 
 	private void runOnInit () {
 		directions = new HashMap<>();
-	}
-
-	public void addItem (InteractiveItem interactiveItem) {
-		itemsInArea.add(interactiveItem);
-	}
-
-	public void addItems (ArrayList<InteractiveItem> interactiveItems) {
-		itemsInArea.addAll(interactiveItems);
 	}
 }
