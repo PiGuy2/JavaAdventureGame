@@ -2,6 +2,7 @@ package objects;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.NoSuchElementException;
 
 import main.UserInput;
 
@@ -49,15 +50,22 @@ public class Item {
 	}
 
 	/**
-	 * If multiple Items are found, the user is asked to select a single item from
-	 * the list of items matching {@code param}.
+	 * Gets an Item from an ArrayList of Items (or Item subclasses). If multiple
+	 * Items are found, the user is asked to select a single item from the list of
+	 * items matching {@code param}. User input is gotten through the
+	 * {@link main.UserInput#get(String) UserInput.get} function.
 	 * 
+	 * @param items
+	 *            is the list of items to search through
 	 * @param param
+	 *            is the search term
 	 * @return Returns an {@link Item#Item(String, String, boolean) Item} that is
 	 *         found from the argument {@code param}. This function searches both
 	 *         the description and name of all Items in the list. If the user
 	 *         presses {@code enter} when prompted to select an item, {@code null}
-	 *         is returned. {@code null} is returned if no items are found.
+	 *         is returned. {@code null} is also returned if no items are found.
+	 *         {@code null} is also returned if a {@link NoSuchElementException} is
+	 *         thrown when getting user input.
 	 */
 	public static Item getItem (ArrayList<? extends Item> items, String param) {
 		ArrayList<Item> area = new ArrayList<>(items);
