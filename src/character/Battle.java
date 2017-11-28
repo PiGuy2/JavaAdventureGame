@@ -10,11 +10,11 @@ import objects.Weapon;
  *
  */
 public class Battle {
-	private Weapon character1Weapon;
 	private ArrayList<InteractiveItem> character1EqItems;
+	private Weapon character1Weapon;
 
-	private Weapon character2Weapon;
 	private ArrayList<InteractiveItem> character2EqItems;
+	private Weapon character2Weapon;
 
 	/**
 	 * Initialize a Battle. Use {@link #run()} to run through the battle. Character

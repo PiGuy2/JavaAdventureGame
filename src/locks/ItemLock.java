@@ -4,53 +4,43 @@ import character.Player;
 import objects.InteractiveItem;
 
 /**
- * Write a description of class ItemLock here.
+ * This class is used to prevent the player from doing certain actions until
+ * they have the necessary item in their inventory.
  *
- * @author Cole
- * @author Owen
  * @author Robby
  */
 
-public class ItemLock {
-	public boolean locked;
-	public String name;
-	public String type;
-	public InteractiveItem UNLitem;
+public class ItemLock extends Lock {
+	private InteractiveItem unlockItem;
 
-	public ItemLock (String name, InteractiveItem UNLitem, boolean locked) {
-		this.name = name;
-		this.UNLitem = UNLitem;
-		this.locked = locked;
+	/**
+	 * Create a lock, which is used to prevent an item from being take or an action
+	 * from being performed before the lock is unlocked. An ItemLock is unlocked by
+	 * the presence of a specific item in the {@link character.Player Player}'s
+	 * {@link character.Inventory Inventory}
+	 * 
+	 * @param unlockItem
+	 *            is the item that must be present in the player's inventory to
+	 *            unlock the lock.
+	 * @param lockedMessage
+	 *            is the message that is printed if the user attempts to take this
+	 *            item while it is locked.
+	 */
+	public ItemLock (InteractiveItem unlockItem, String lockedMessage) {
+		super(lockedMessage);
+		this.unlockItem = unlockItem;
+		this.lockedMessage = lockedMessage;
 	}
 
-	public boolean getlocked () {
-		return locked;
+	public InteractiveItem getUnlockItem () {
+		return unlockItem;
 	}
 
-	public String getName () {
-		return name;
+	public boolean isUnlocked () {
+		return Player.inventory.contains(unlockItem);
 	}
 
-	public InteractiveItem getUNLitem () {
-		return UNLitem;
-	}
-
-	public void setlocked (boolean locked) {
-		this.locked = locked;
-	}
-
-	public void setName (String name) {
-		this.name = name;
-	}
-
-	public void setUNLitem (InteractiveItem UNLitem) {
-		this.UNLitem = UNLitem;
-	}
-
-	public void Unlock (ItemLock lock) {
-		if (Player.inventory.getItems().contains(lock.getUNLitem())) {
-			lock.setlocked(false);
-			System.out.println("Good one pal, it's unlocked");
-		}
+	public void setUnlockItem (InteractiveItem unlockItem) {
+		this.unlockItem = unlockItem;
 	}
 }
