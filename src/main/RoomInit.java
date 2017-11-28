@@ -6,6 +6,7 @@ package main;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import locks.ItemLock;
 import objects.BackgroundItem;
 import objects.InteractiveItem;
 import objects.Room;
@@ -16,19 +17,18 @@ import objects.Room;
  */
 public class RoomInit {
 	public static Room makeRooms () {
+		InteractiveItem pinkKey = new InteractiveItem("key", "pink");
 		ArrayList<InteractiveItem> drOfficeInteractiveItems = new ArrayList<>(Arrays.asList(
 				new InteractiveItem("briefcase", "red"), new InteractiveItem("painting", "pretty"),
 				new InteractiveItem("coat", "large trench"), new InteractiveItem("door", "trap"),
-				new InteractiveItem("dagger", "small"), new InteractiveItem("lamp"),
-				new InteractiveItem("piece", "wood"), new InteractiveItem("key", "pink")));
+				new InteractiveItem("dagger", "small"), new InteractiveItem("lamp"), pinkKey));
 		ArrayList<BackgroundItem> drOfficeBackgroundItems = new ArrayList<>(Arrays.asList(
 				new BackgroundItem("desk", "large"), new BackgroundItem("chair", "comfy"),
 				new BackgroundItem("shelf", "book"), new BackgroundItem("box", "wooden cigar")));
 		Room drOffice = new Room("doctor's office", "",
 				"The room is white with windows all around, yet the room seems dark.",
 				drOfficeInteractiveItems, drOfficeBackgroundItems);
-		// to get card you have to use the piece of wood to hold open the trap door you
-		// grab card and escape the room you also need the pink key for fac s
+		// to get card you have to take the trap door then go down then take card
 
 		// ----------------
 
@@ -38,18 +38,20 @@ public class RoomInit {
 		// get card and leave
 
 		// ----------------
-
+		ItemLock boxLock = new ItemLock(pinkKey, "you do not have the pink key.");
+		InteractiveItem smallBox = new InteractiveItem("box", "small", boxLock);
+		ItemLock cardLock = new ItemLock(smallBox, "you do not have the small box.");
 		ArrayList<InteractiveItem> factorySInteractiveItems = new ArrayList<>(Arrays.asList(
-				new InteractiveItem("card", "ace of hearts"), new InteractiveItem("can", "trash"),
-				new InteractiveItem("painting", "large"), new InteractiveItem("notebook", "blue"),
-				new InteractiveItem("lock", "pink on box"), new InteractiveItem("box", "small")));
+				new InteractiveItem("card", "ace of hearts", cardLock),
+				new InteractiveItem("can", "trash"), new InteractiveItem("painting", "large"),
+				new InteractiveItem("notebook", "blue"), new InteractiveItem("lock", "pink on box"),
+				smallBox));
 		ArrayList<BackgroundItem> factorySBackgroundItems = new ArrayList<>(Arrays
 				.asList(new BackgroundItem("painting", "small"), new BackgroundItem("window")));
 		Room factoryS = new Room("Factory S", "", "It is cold.", factorySInteractiveItems,
 				factorySBackgroundItems);
 		// you have to open trash can to get a box with a pink lock on it use the pink
-		// key you got from
-		// droffice to get a card
+		// key you got from droffice to get a card
 
 		// ----------------
 
@@ -90,7 +92,7 @@ public class RoomInit {
 				new InteractiveItem("chair", "short")));
 		ArrayList<BackgroundItem> pokerRoomBackgroundItems = new ArrayList<>(
 				Arrays.asList(new BackgroundItem("TV", "broken")));
-		Room pokerRoom = new Room("Poker Room", "round and open room", pokerRoomInteractiveItems,
+		Room pokerRoom = new Room("Poker Room", "round and open", pokerRoomInteractiveItems,
 				pokerRoomBackgroundItems);
 		// when you enter this room with 4 cards you win
 

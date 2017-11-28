@@ -24,13 +24,30 @@ public class InteractiveItem extends Item {
 	 * Create a new interactive item object
 	 * 
 	 * @param name
-	 *            The name of the item	 
+	 *            The name of the item
 	 * @param description
 	 *            The description of the object. This is printed when {@code look}
 	 *            is run.
 	 */
 	public InteractiveItem (String name, String description) {
 		super(name, description, true);
+	}
+
+	/**
+	 * Create a new interactive item object
+	 * 
+	 * @param name
+	 *            The name of the item
+	 * @param description
+	 *            The description of the object. This is printed when {@code look}
+	 *            is run.
+	 * @param lock
+	 *            The ItemLock that locks the item
+	 */
+	public InteractiveItem (String name, String description, ItemLock lock) {
+		this(name, description);
+		this.lock = lock;
+		hasLock = true;
 	}
 
 	/**
@@ -74,7 +91,8 @@ public class InteractiveItem extends Item {
 	 * @see #removeItemLock()
 	 * @see #addItemLock(InteractiveItem, String)
 	 */
-	public boolean addItemLock (InteractiveItem unlockItem, String lockedMessage, boolean overwrite) {
+	public boolean addItemLock (InteractiveItem unlockItem, String lockedMessage,
+			boolean overwrite) {
 		if (overwrite || !hasLock) {
 			if (unlockItem != null) {
 				boolean r = hasLock;
@@ -100,5 +118,19 @@ public class InteractiveItem extends Item {
 		lock = null;
 		hasLock = false;
 		return r;
+	}
+
+	public boolean isUnlocked () {
+		if (hasLock) {
+			return lock.isUnlocked();
+		}
+		return true;
+	}
+
+	public String lockMessage () {
+		if (hasLock) {
+			return lock.getMessage();
+		}
+		return "";
 	}
 }
