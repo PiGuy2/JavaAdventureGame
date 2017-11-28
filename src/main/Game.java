@@ -199,15 +199,16 @@ public class Game {
 				}
 			}
 		}
-		if (winItems == null) {
-			return false;
-		}
-		for (InteractiveItem i : winItems) {
-			if (!Player.inventory.getItems().contains(i)) {
-				return false;
+		// if (winItems == null) {
+		// return false;
+		// }
+		int cardCount = 0;
+		for (InteractiveItem i : Player.inventory.getItems()) {
+			if (i.getName().equals("card")) {
+				cardCount++;
 			}
 		}
-		return true;
+		return cardCount > 3;
 	}
 
 	/*

@@ -23,9 +23,6 @@ public class InteractiveItem extends Item {
 	 * 
 	 * @param name
 	 *            The name of the item
-	 * @param description
-	 *            The description of the object. This is printed when {@code look}
-	 *            is run.
 	 */
 	public InteractiveItem (String name) {
 		this(name, "");

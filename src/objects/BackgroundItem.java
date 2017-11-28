@@ -23,9 +23,6 @@ public class BackgroundItem extends Item {
 	 * 
 	 * @param name
 	 *            The name of the item
-	 * @param description
-	 *            The description of the object. This is printed when {@code look}
-	 *            is run.
 	 */
 	public BackgroundItem (String name) {
 		this(name, "");

@@ -97,23 +97,16 @@ public class RoomInit {
 		// ------------------------
 
 		pokerRoom.setDirection("e", hallWay);
-		hallWay.setDirection("w", pokerRoom);
 		hallWay.setDirection("n", drOffice);
 		hallWay.setDirection("e", factoryS);
 		hallWay.setDirection("se", factoryT);
 		hallWay.setDirection("s", spacePirates);
-		drOffice.setDirection("s", hallWay);
 		drOffice.setDirection("d", trapRoom);
-		factoryS.setDirection("w", hallWay);
 		factoryS.setDirection("s", factoryT);
-		factoryT.setDirection("n", factoryS);
-		factoryT.setDirection("nw", hallWay);
 		factoryT.setDirection("w", spacePirates);
-		spacePirates.setDirection("n", hallWay);
-		spacePirates.setDirection("e", factoryT);
 
 		// ----------------------
 
-		return drOffice;
+		return pokerRoom;
 	}
 }
