@@ -6,6 +6,7 @@ import java.util.Arrays;
 import character.Player;
 import objects.InteractiveItem;
 import objects.Item;
+import objects.ProccessedItem;
 import objects.Room;
 
 /**
@@ -43,7 +44,7 @@ public class Game {
 	// t lamp; i; eq lamp & i; eqd
 	/**
 	 * Runs the {@link Game}
-	 * 
+	 *
 	 * @return Whether the user has won the game.
 	 */
 	public boolean runGame () {
@@ -57,7 +58,16 @@ public class Game {
 				cmd = CommandParser.replaceCommand(cmd);
 				String cmdAction = cmd.split(" ")[0];
 				String [] cmdArgs = Arrays.copyOfRange(cmd.split(" "), 1, cmd.split(" ").length);
-				if (cmdAction.equals("look")) {
+				Item lastI = null;
+				for (InteractiveItem i : currentRoom.getItemsInArea()) {
+					if (cmd.toLowerCase().contains(i.getName().toLowerCase())) {
+						lastI = i;
+						break;
+					}
+				}
+				if (lastI != null && lastI.getClass() == ProccessedItem.class) {
+					((ProccessedItem) lastI).call(cmd.split(" "));
+				} else if (cmdAction.equals("look")) {
 					if (cmdArgs.length == 0) {
 						look();
 					} else {
@@ -129,33 +139,6 @@ public class Game {
 					for (String i : help) {
 						System.out.println("\t" + i);
 					}
-				} else if (cmdAction.equals("type")) {
-					// TODO find out what the "type" command does
-					System.out.println("cmd: type");
-				} else if (cmdAction.equals("move")) {
-					// TODO find out what the "move" command does
-					System.out.println("cmd: move");
-				} else if (cmdAction.equals("pull")) {
-					// TODO "pull" command
-					System.out.println("cmd: pull");
-				} else if (cmdAction.equals("press")) {
-					// TODO "press" command
-					System.out.println("cmd: press");
-				} else if (cmdAction.equals("remove")) {
-					// TODO find out what the "remove" command does
-					System.out.println("cmd: remove");
-				} else if (cmdAction.equals("shoot")) {
-					// TODO "shoot" command
-					System.out.println("cmd: shoot");
-				} else if (cmdAction.equals("kill")) {
-					// TODO "kill" command
-					System.out.println("cmd: kill");
-				} else if (cmdAction.equals("open")) {
-					// TODO "open" command
-					System.out.println("cmd: open");
-				} else if (cmdAction.equals("wear")) {
-					// TODO find out what the "wear" command is
-					System.out.println("cmd: wear");
 				} else if (cmdAction.equals("equip")) {
 					// Equips an item from the inventory
 					InteractiveItem itemToEquip = Player.inventory

@@ -1,114 +1,57 @@
 /**
- * 
+ *
  */
 package main;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import locks.ItemLock;
 import objects.BackgroundItem;
 import objects.InteractiveItem;
 import objects.Room;
 
 /**
  * @author Owen
+ * @author Tim
  *
  */
 public class RoomInit {
 	public static Room makeRooms () {
-		InteractiveItem pinkKey = new InteractiveItem("key", "pink");
-		ArrayList<InteractiveItem> drOfficeInteractiveItems = new ArrayList<>(Arrays.asList(
-				new InteractiveItem("briefcase", "red"), new InteractiveItem("painting", "pretty"),
-				new InteractiveItem("coat", "large trench"), new InteractiveItem("door", "trap"),
-				new InteractiveItem("dagger", "small"), new InteractiveItem("lamp"), pinkKey));
-		ArrayList<BackgroundItem> drOfficeBackgroundItems = new ArrayList<>(Arrays.asList(
-				new BackgroundItem("desk", "large"), new BackgroundItem("chair", "comfy"),
-				new BackgroundItem("shelf", "book"), new BackgroundItem("box", "wooden cigar")));
-		Room drOffice = new Room("doctor's office", "",
-				"The room is white with windows all around, yet the room seems dark.",
-				drOfficeInteractiveItems, drOfficeBackgroundItems);
-		// to get card you have to take the trap door then go down then take card
+		// InteractiveItem pinkKey = new InteractiveItem("key", "pink");
+		// ArrayList<InteractiveItem> drOfficeInteractiveItems = new
+		// ArrayList<>(Arrays.asList(
+		// new InteractiveItem("briefcase", "red"), new InteractiveItem("painting",
+		// "pretty"),
+		// new InteractiveItem("coat", "large trench"), new InteractiveItem("door",
+		// "trap"),
+		// new InteractiveItem("dagger", "small"), new InteractiveItem("lamp"),
+		// pinkKey));
+		// ArrayList<BackgroundItem> drOfficeBackgroundItems = new
+		// ArrayList<>(Arrays.asList(
+		// new BackgroundItem("desk", "large"), new BackgroundItem("chair", "comfy"),
+		// new BackgroundItem("shelf", "book"), new BackgroundItem("box", "wooden
+		// cigar")));
+		// Room drOffice = new Room("doctor's office", "",
+		// "The room is white with windows all around, yet the room seems dark.",
+		// drOfficeInteractiveItems, drOfficeBackgroundItems);
 
-		// ----------------
+		// new InteractiveItem("item", "description")
+		// new BackgroundItem("item", "description")
 
-		ArrayList<InteractiveItem> trapRoomInteractiveItems = new ArrayList<>(
-				Arrays.asList(new InteractiveItem("card", "ace of spades")));
-		Room trapRoom = new Room("Trap Room", "small", trapRoomInteractiveItems);
-		// get card and leave
+		ArrayList<InteractiveItem> ---InteractiveItems = new ArrayList<>(
+				Arrays.asList(new InteractiveItem("item", "description")));
+		ArrayList<BackgroundItem> ---BackgroundItems = new ArrayList<>(
+				Arrays.asList(new BackgroundItem("item", "description")));
+		Room roomName = new Room("---", "description", "extended description",
+				roomNameInteractiveItems, roomNameBackgroundItems);
 
-		// ----------------
-		ItemLock boxLock = new ItemLock(pinkKey, "you do not have the pink key.");
-		InteractiveItem smallBox = new InteractiveItem("box", "small", boxLock);
-		ItemLock cardLock = new ItemLock(smallBox, "you do not have the small box.");
-		ArrayList<InteractiveItem> factorySInteractiveItems = new ArrayList<>(Arrays.asList(
-				new InteractiveItem("card", "ace of hearts", cardLock),
-				new InteractiveItem("can", "trash"), new InteractiveItem("painting", "large"),
-				new InteractiveItem("notebook", "blue"), new InteractiveItem("lock", "pink on box"),
-				smallBox));
-		ArrayList<BackgroundItem> factorySBackgroundItems = new ArrayList<>(Arrays
-				.asList(new BackgroundItem("painting", "small"), new BackgroundItem("window")));
-		Room factoryS = new Room("Factory S", "", "It is cold.", factorySInteractiveItems,
-				factorySBackgroundItems);
-		// you have to open trash can to get a box with a pink lock on it use the pink
-		// key you got from droffice to get a card
+		ArrayList<InteractiveItem> ElevensRoomInteractiveItems = new ArrayList<>(
+				Arrays.asList(new InteractiveItem("table", "round"), new InteractiveItem("chair", "small"), new InteractiveItem("case", "trophey")));
+		ArrayList<BackgroundItem> ElevensRoomBackgroundItems = new ArrayList<>(
+				Arrays.asList(new BackgroundItem("painting", "stupid")));
+		Room roomName = new Room("Elevens Room", "small", "extended description",
+				roomNameInteractiveItems, roomNameBackgroundItems);
 
-		// ----------------
-
-		ArrayList<InteractiveItem> factoryTInteractiveItems = new ArrayList<>(Arrays.asList(
-				new InteractiveItem("card", "ace of diamonds"), new InteractiveItem("desk", "iron"),
-				new InteractiveItem("drawer", "locked"), new InteractiveItem("mirror", "small"),
-				new InteractiveItem("table", "small wooden"),
-				new InteractiveItem("chair", "comfortable")));
-		ArrayList<BackgroundItem> factoryTBackgroundItems = new ArrayList<>(
-				Arrays.asList(new BackgroundItem("window", "large"),
-						new BackgroundItem("lamp", "tall"), new BackgroundItem("apple", "green")));
-		Room factoryT = new Room("Factory T", "", "This room is extremely hot.",
-				factoryTInteractiveItems, factoryTBackgroundItems);
-		// in this room you have to go to the desk and sit in the chair when you do the
-		// drawer opens and reveals a card
-		// -----
-		Room hallWay = new Room("Hallway", "long white");
-		// go places
-
-		// -----------------------
-
-		ArrayList<InteractiveItem> spacePiratesInteractiveItems = new ArrayList<>(Arrays.asList(
-				new InteractiveItem("wall", "thin"), new InteractiveItem("lever"),
-				new InteractiveItem("shelf", "book"), new InteractiveItem("book", "red"),
-				new InteractiveItem("book", "yellow"), new InteractiveItem("switch", "power"),
-				new InteractiveItem("card", "ace of clubs")));
-		ArrayList<BackgroundItem> spacePiratesBackgroundItems = new ArrayList<>(
-				Arrays.asList(new BackgroundItem("incinerator", "large")));
-		Room spacePirates = new Room("Space Pirates", "", "This has a cold and distant feel.",
-				spacePiratesInteractiveItems, spacePiratesBackgroundItems);
-		// you have to turn on power switch then break the wall then pull lever and a
-		// card appears
-
-		// -----------------------
-		ArrayList<InteractiveItem> pokerRoomInteractiveItems = new ArrayList<>(Arrays.asList(
-				new InteractiveItem("table", "round"), new InteractiveItem("chair", "large"),
-				new InteractiveItem("chair", "small"), new InteractiveItem("chair", "tall"),
-				new InteractiveItem("chair", "short")));
-		ArrayList<BackgroundItem> pokerRoomBackgroundItems = new ArrayList<>(
-				Arrays.asList(new BackgroundItem("TV", "broken")));
-		Room pokerRoom = new Room("Poker Room", "round and open", pokerRoomInteractiveItems,
-				pokerRoomBackgroundItems);
-		// when you enter this room with 4 cards you win
-
-		// ------------------------
-
-		pokerRoom.setDirection("e", hallWay);
-		hallWay.setDirection("n", drOffice);
-		hallWay.setDirection("e", factoryS);
-		hallWay.setDirection("se", factoryT);
-		hallWay.setDirection("s", spacePirates);
-		drOffice.setDirection("d", trapRoom);
-		factoryS.setDirection("s", factoryT);
-		factoryT.setDirection("w", spacePirates);
-
-		// ----------------------
-
-		return pokerRoom;
+		return new Room(); // starting room
 	}
 }

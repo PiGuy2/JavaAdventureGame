@@ -4,7 +4,7 @@ import locks.ItemLock;
 
 /**
  * @author Robby
- * 
+ *
  */
 public class InteractiveItem extends Item {
 	protected boolean hasLock;
@@ -12,7 +12,7 @@ public class InteractiveItem extends Item {
 
 	/**
 	 * Create a new interactive item object
-	 * 
+	 *
 	 * @param name
 	 *            The name of the item
 	 */
@@ -22,7 +22,7 @@ public class InteractiveItem extends Item {
 
 	/**
 	 * Create a new interactive item object
-	 * 
+	 *
 	 * @param name
 	 *            The name of the item
 	 * @param description
@@ -35,7 +35,7 @@ public class InteractiveItem extends Item {
 
 	/**
 	 * Create a new interactive item object
-	 * 
+	 *
 	 * @param name
 	 *            The name of the item
 	 * @param description
@@ -56,7 +56,7 @@ public class InteractiveItem extends Item {
 	 * ItemLock is removed. See
 	 * {@link #addItemLock(InteractiveItem, String, boolean)} if you don't want to
 	 * overwrite any previous lock.
-	 * 
+	 *
 	 * @param unlockItem
 	 *            is the item that must be present in the player's inventory to
 	 *            unlock the lock.
@@ -76,7 +76,7 @@ public class InteractiveItem extends Item {
 	 * ItemLock, it is only overwritten if {@code overwrite} is true. If
 	 * {@code unlockItem} is {@code null} and overwrite is true, the ItemLock is
 	 * removed.
-	 * 
+	 *
 	 * @param unlockItem
 	 *            is the item that must be present in the player's inventory to
 	 *            unlock the lock.
@@ -105,21 +105,6 @@ public class InteractiveItem extends Item {
 		return true;
 	}
 
-	/**
-	 * Removes the {@link locks.ItemLock ItemLock} on this item
-	 * 
-	 * @return If there was already an ItemLock.
-	 * @see locks.ItemLock#ItemLock(InteractiveItem, String)
-	 * @see #addItemLock(InteractiveItem, String)
-	 * @see #addItemLock(InteractiveItem, String, boolean)
-	 */
-	public boolean removeItemLock () {
-		boolean r = hasLock;
-		lock = null;
-		hasLock = false;
-		return r;
-	}
-
 	public boolean isUnlocked () {
 		if (hasLock) {
 			return lock.isUnlocked();
@@ -132,5 +117,20 @@ public class InteractiveItem extends Item {
 			return lock.getMessage();
 		}
 		return "";
+	}
+
+	/**
+	 * Removes the {@link locks.ItemLock ItemLock} on this item
+	 *
+	 * @return If there was already an ItemLock.
+	 * @see locks.ItemLock#ItemLock(InteractiveItem, String)
+	 * @see #addItemLock(InteractiveItem, String)
+	 * @see #addItemLock(InteractiveItem, String, boolean)
+	 */
+	public boolean removeItemLock () {
+		boolean r = hasLock;
+		lock = null;
+		hasLock = false;
+		return r;
 	}
 }

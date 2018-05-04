@@ -33,7 +33,7 @@ public class Room {
 	 * Creates a {@code Room} object to store a list of
 	 * {@link Item#Item(String, String, boolean) items} and
 	 * {@link character.NPC#NPC() NPCs} in the room
-	 * 
+	 *
 	 * @param name
 	 *            is the name of the room
 	 */
@@ -45,7 +45,7 @@ public class Room {
 	 * Creates a {@code Room} object to store a list of
 	 * {@link Item#Item(String, String, boolean) items} and
 	 * {@link character.NPC#NPC() NPCs} in the room
-	 * 
+	 *
 	 * @param name
 	 *            is the name of the room
 	 */
@@ -57,21 +57,22 @@ public class Room {
 	 * Creates a {@code Room} object to store a list of
 	 * {@link Item#Item(String, String, boolean) items} and
 	 * {@link character.NPC#NPC() NPCs} in the room
-	 * 
+	 *
 	 * @param name
 	 *            is the name of the room
 	 * @param description
 	 *            is the adjective or phrase printed before name
 	 */
 	public Room (String name, String description) {
-		this(name, description, "", new ArrayList<InteractiveItem>(), new ArrayList<BackgroundItem>());
+		this(name, description, "", new ArrayList<InteractiveItem>(),
+				new ArrayList<BackgroundItem>());
 	}
 
 	/**
 	 * Creates a {@code Room} object to store a list of
 	 * {@link Item#Item(String, String, boolean) items} and
 	 * {@link character.NPC#NPC() NPCs} in the room
-	 * 
+	 *
 	 * @param name
 	 *            is the name of the room
 	 * @param description
@@ -85,7 +86,7 @@ public class Room {
 	 * Creates a {@code Room} object to store a list of
 	 * {@link Item#Item(String, String, boolean) items} and
 	 * {@link character.NPC#NPC() NPCs} in the room
-	 * 
+	 *
 	 * @param name
 	 *            is the name of the room
 	 * @param description
@@ -100,7 +101,7 @@ public class Room {
 	 * Creates a {@code Room} object to store a list of
 	 * {@link Item#Item(String, String, boolean) items} and
 	 * {@link character.NPC#NPC() NPCs} in the room
-	 * 
+	 *
 	 * @param name
 	 *            is the name of the room
 	 * @param description
@@ -109,14 +110,15 @@ public class Room {
 	 *            is printed on a new line after the name and description
 	 */
 	public Room (String name, String description, String extDescription) {
-		this(name, description, extDescription, new ArrayList<InteractiveItem>(), new ArrayList<BackgroundItem>());
+		this(name, description, extDescription, new ArrayList<InteractiveItem>(),
+				new ArrayList<BackgroundItem>());
 	}
 
 	/**
 	 * Creates a {@code Room} object to store a list of
 	 * {@link Item#Item(String, String, boolean) items} and
 	 * {@link character.NPC#NPC() NPCs} in the room
-	 * 
+	 *
 	 * @param name
 	 *            is the name of the room
 	 * @param description
@@ -124,7 +126,8 @@ public class Room {
 	 * @param extDescription
 	 *            is printed on a new line after the name and description
 	 */
-	public Room (String name, String description, String extDescription, ArrayList<InteractiveItem> itemsInArea) {
+	public Room (String name, String description, String extDescription,
+			ArrayList<InteractiveItem> itemsInArea) {
 		this(name, description, extDescription, itemsInArea, new ArrayList<BackgroundItem>());
 	}
 
@@ -132,7 +135,7 @@ public class Room {
 	 * Creates a {@code Room} object to store a list of
 	 * {@link Item#Item(String, String, boolean) items} and
 	 * {@link character.NPC#NPC() NPCs} in the room
-	 * 
+	 *
 	 * @param name
 	 *            is the name of the room
 	 * @param description
@@ -140,8 +143,8 @@ public class Room {
 	 * @param extDescription
 	 *            is printed on a new line after the name and description
 	 */
-	public Room (String name, String description, String extDescription, ArrayList<InteractiveItem> itemsInArea,
-			ArrayList<BackgroundItem> backgroundItems) {
+	public Room (String name, String description, String extDescription,
+			ArrayList<InteractiveItem> itemsInArea, ArrayList<BackgroundItem> backgroundItems) {
 		this.name = name;
 		this.description = description;
 		this.extDescription = extDescription;
@@ -167,7 +170,7 @@ public class Room {
 	/**
 	 * If multiple Items are found, the user is asked to select a single item from
 	 * the list of items matching {@code param}.
-	 * 
+	 *
 	 * @param param
 	 * @return Returns an {@link Item#Item(String, String, boolean) Item} that is
 	 *         found from the argument {@code param}. This function searches both
@@ -182,10 +185,14 @@ public class Room {
 		return Item.getItem(area, param);
 	}
 
+	public ArrayList<InteractiveItem> getItemsInArea () {
+		return itemsInArea;
+	}
+
 	/**
 	 * Get a room based on direction relative to this room. Returns {@code null} if
 	 * given a nonexistent direction
-	 * 
+	 *
 	 * @param dir
 	 *            The direction you want to go
 	 * @return The room specified by the direction
@@ -216,7 +223,8 @@ public class Room {
 		} else if (directionsToMove.size() == 1) {
 			System.out.println("You can move " + directionsToMove.get(0) + ".");
 		} else if (directionsToMove.size() == 2) {
-			System.out.println("You can move " + directionsToMove.get(0) + " and " + directionsToMove.get(1) + ".");
+			System.out.println("You can move " + directionsToMove.get(0) + " and "
+					+ directionsToMove.get(1) + ".");
 		} else {
 			System.out.print("You can move ");
 			String lastDirection = directionsToMove.remove(directionsToMove.size() - 1);
@@ -269,7 +277,7 @@ public class Room {
 
 	/**
 	 * Set direction you can move when you are in this room
-	 * 
+	 *
 	 * @param d
 	 *            Direction name (can be anything)
 	 * @param room
