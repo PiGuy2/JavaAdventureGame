@@ -31,8 +31,7 @@ public class ProccessedItem extends InteractiveItem {
 	public String getDescription () {
 		try {
 			return desc.getDescription();
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (NullPointerException e) {
 			return super.getDescription();
 		}
 	}

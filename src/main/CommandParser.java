@@ -16,17 +16,18 @@ public class CommandParser {
 	static {
 		/*
 		 * regular substitutions replace words or phrases in the command
-		 * 
+		 *
 		 * How to add substitutions: substitutions.put("string", "replacement");
 		 */
 		substitutions.put("north-east", "northeast");
 		substitutions.put("north-west", "northwest");
 		substitutions.put("south-east", "southeast");
 		substitutions.put("south-west", "southwest");
+		substitutions.put("l", "look");
 
 		/*
 		 * command substitutions replace the first word in the command
-		 * 
+		 *
 		 * How to add command substitutions: cmdSubstitutions.put("string",
 		 * "replacement");
 		 */
@@ -53,7 +54,7 @@ public class CommandParser {
 
 		/*
 		 * full substitutions only replace if the whole command given equals
-		 * 
+		 *
 		 * How to add full substitutions: fullSubstitutions.put("string",
 		 * "replacement");
 		 */
@@ -63,7 +64,7 @@ public class CommandParser {
 
 		/*
 		 * full substitutions only replace if the whole command given equals
-		 * 
+		 *
 		 * How to add full substitutions: dirSubstitutions.put("string", "replacement");
 		 */
 		dirSubstitutions.put("u", "up");

@@ -102,7 +102,7 @@ public class Game {
 								currentRoom.removeItem(iTT);
 								System.out.println(itemName + " taken.");
 							} else {
-								System.out.println("You cannot take " + itemName.toLowerCase()
+								System.out.println("You cannot take the " + itemName.toLowerCase()
 										+ ", because " + iTT.lockMessage());
 							}
 						} else {
@@ -185,7 +185,7 @@ public class Game {
 						itemName = itemName.substring(0, 1).toUpperCase() + itemName.substring(1);
 						Player.inventory.removeItem(itemToDrop);
 						currentRoom.addItem(itemToDrop);
-						System.out.println(itemName + " taken.");
+						System.out.println(itemName + " dropped.");
 					}
 				} else if (cmdAction.equals("quit")) {
 					break mainloop;

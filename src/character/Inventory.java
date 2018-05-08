@@ -10,7 +10,7 @@ import objects.Item;
  * {@link Player#Player() player} or of an {@link NPC#NPC() NPC}. Includes
  * function to add and remove items from the inventory, as well as to find an
  * item in the inventory based on user input.
- * 
+ *
  * @author Cole
  * @author Owen
  * @author Robby
@@ -64,7 +64,7 @@ public class Inventory {
 
 	/**
 	 * removes item from the Inventory
-	 * 
+	 *
 	 */
 	public void removeItem (InteractiveItem interactiveItem) {
 		items.remove(interactiveItem);
