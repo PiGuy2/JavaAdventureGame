@@ -13,6 +13,7 @@ import objects.ProccessedItem;
 import objects.Room;
 
 /**
+ * @author Robby
  * @author Owen
  * @author Tim
  *
@@ -47,22 +48,32 @@ public class RoomInit {
 		// Room roomName = new Room("---", "description", "extended description",
 		// roomNameInteractiveItems, roomNameBackgroundItems);
 
-		ArrayList<InteractiveItem> ElevensRoomInteractiveItems = new ArrayList<>(Arrays.asList(
-				new InteractiveItem("table", "round"), new InteractiveItem("chair", "small"),
-				new InteractiveItem("case", "trophey")));
+		ArrayList<InteractiveItem> ElevensRoomInteractiveItems = new ArrayList<>(
+				Arrays.asList(new InteractiveItem("table", "round", false),
+						new InteractiveItem("chair", "small", false),
+						new InteractiveItem("case", "trophey", false)));
 		ArrayList<BackgroundItem> ElevensRoomBackgroundItems = new ArrayList<>(
 				Arrays.asList(new BackgroundItem("painting", "stupid")));
 		Room ElevensRoom = new Room("Elevens Room", "small", "The blank room",
 				ElevensRoomInteractiveItems, ElevensRoomBackgroundItems);
 
 		PrizeBoxFunction PBF = new PrizeBoxFunction();
-		ArrayList<InteractiveItem> slotMachineRoomInteractiveItems = new ArrayList<>(Arrays.asList(
-				new ProccessedItem("box", PBF, PBF), new InteractiveItem("chair", "small"),
-				new InteractiveItem("slot machine", "large")));
-		ArrayList<BackgroundItem> slotMachineRoomBackgroundItems = new ArrayList<>();
+		ArrayList<InteractiveItem> slotMachineRoomInteractiveItems = new ArrayList<>(
+				Arrays.asList(new ProccessedItem("box", PBF, PBF),
+						new InteractiveItem("slot machine", "large", false)));
+		ArrayList<BackgroundItem> slotMachineRoomBackgroundItems = new ArrayList<>(
+				Arrays.asList(new BackgroundItem("chair", "small")));
 		Room slotMachineRoom = new Room("Slot Machine Room", "large",
 				"A room full of old slot machines, and old ladies.",
 				slotMachineRoomInteractiveItems, slotMachineRoomBackgroundItems);
+
+		ArrayList<InteractiveItem> blackJackInteractiveItems = new ArrayList<>(Arrays.asList(
+				new InteractiveItem("table", "Blackjack"), new InteractiveItem("chair", "small"),
+				new InteractiveItem("chest", "reward"), new InteractiveItem("Ace of Clubs")));
+		ArrayList<BackgroundItem> blackJackBackgroundItems = new ArrayList<>(
+				Arrays.asList(new BackgroundItem("item", "description")));
+		Room BlackJack = new Room("Blackjack Room", "A cute lil", blackJackInteractiveItems,
+				blackJackBackgroundItems);
 
 		ElevensRoom.setDirection("n", slotMachineRoom);
 

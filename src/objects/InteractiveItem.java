@@ -4,11 +4,13 @@ import locks.ItemLock;
 
 /**
  * @author Robby
+ * @author Owen
  *
  */
 public class InteractiveItem extends Item {
 	protected boolean hasLock;
 	protected ItemLock lock;
+	protected boolean moveable;
 
 	/**
 	 * Create a new interactive item object
@@ -18,6 +20,18 @@ public class InteractiveItem extends Item {
 	 */
 	public InteractiveItem (String name) {
 		this(name, "");
+		moveable = true;
+	}
+
+	/**
+	 * Create a new interactive item object
+	 *
+	 * @param name
+	 *            The name of the item
+	 */
+	public InteractiveItem (String name, boolean moveable) {
+		this(name, "");
+		this.moveable = moveable;
 	}
 
 	/**
@@ -31,6 +45,21 @@ public class InteractiveItem extends Item {
 	 */
 	public InteractiveItem (String name, String description) {
 		super(name, description, true);
+		moveable = true;
+	}
+
+	/**
+	 * Create a new interactive item object
+	 *
+	 * @param name
+	 *            The name of the item
+	 * @param description
+	 *            The description of the object. This is printed when {@code look}
+	 *            is run.
+	 */
+	public InteractiveItem (String name, String description, boolean moveable) {
+		super(name, description, true);
+		this.moveable = moveable;
 	}
 
 	/**
@@ -48,6 +77,7 @@ public class InteractiveItem extends Item {
 		this(name, description);
 		this.lock = lock;
 		hasLock = true;
+		moveable = true;
 	}
 
 	/**
@@ -105,6 +135,10 @@ public class InteractiveItem extends Item {
 		return true;
 	}
 
+	public boolean isMoveable () {
+		return moveable;
+	}
+
 	public boolean isUnlocked () {
 		if (hasLock) {
 			return lock.isUnlocked();
@@ -132,5 +166,9 @@ public class InteractiveItem extends Item {
 		lock = null;
 		hasLock = false;
 		return r;
+	}
+
+	public void setMoveable (boolean moveable) {
+		this.moveable = moveable;
 	}
 }

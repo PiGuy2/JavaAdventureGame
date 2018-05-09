@@ -4,7 +4,6 @@ import character.Player;
 import objects.InteractiveItem;
 
 /**
- * @author Owen
  * @author Tim
  * @author Robby
  *

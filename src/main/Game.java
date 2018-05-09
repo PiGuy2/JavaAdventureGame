@@ -97,10 +97,12 @@ public class Game {
 						itemName = itemName.substring(0, 1).toUpperCase() + itemName.substring(1);
 						if (itemToTake.getClass().equals(InteractiveItem.class)) {
 							InteractiveItem iTT = (InteractiveItem) itemToTake;
-							if (iTT.isUnlocked()) {
+							if (iTT.isUnlocked() && iTT.isMoveable()) {
 								Player.inventory.addItem(iTT);
 								currentRoom.removeItem(iTT);
 								System.out.println(itemName + " taken.");
+							} else if (iTT.isUnlocked()) {
+								System.out.println("You cannot take the " + itemName.toLowerCase());
 							} else {
 								System.out.println("You cannot take the " + itemName.toLowerCase()
 										+ ", because " + iTT.lockMessage());
@@ -109,12 +111,6 @@ public class Game {
 							System.out.println("You cannot take " + itemName.toLowerCase() + ".");
 						}
 					}
-				} else if (cmdAction.equals("use")) {
-					// TODO "use" command
-					System.out.println("cmd: use");
-				} else if (cmdAction.equals("break")) {
-					// TODO "break" command
-					System.out.println("cmd: break");
 				} else if (cmdAction.equals("help")) {
 					// TODO improve help
 					System.out.println("Help:");
@@ -132,50 +128,12 @@ public class Game {
 							"\tInventory (i) [inventory] -  list items in inventory",
 							"\tTake (t) [take {item name}] -  take an item in the room, moving it to your inventory",
 							"\tDrop (dr) [drop {item name}] -  drop an item from your inventory",
-							"\tEquip (eq) [equip {item name}] - equip an item from your inventory",
-							"\tUnquip (ueq) [unequip {item name}] - unequip an item and move it to your inventory",
-							"\tEquipped (eqd) [equipped] - list equipped items",
 							"\tQuit (q) [quit] -  quit the game"};
 					for (String i : help) {
 						System.out.println("\t" + i);
 					}
-				} else if (cmdAction.equals("equip")) {
-					// Equips an item from the inventory
-					InteractiveItem itemToEquip = Player.inventory
-							.getItem(String.join(" ", cmdArgs));
-					if (itemToEquip != null) {
-						String itemName = itemToEquip.getDescription() + " "
-								+ itemToEquip.getName();
-						itemName = itemName.trim();
-						itemName = itemName.substring(0, 1).toUpperCase() + itemName.substring(1);
-						Player.inventory.removeItem(itemToEquip);
-						Player.equippedItems.add(itemToEquip);
-						System.out.println(itemName + " equipped.");
-					}
-				} else if (cmdAction.equals("unequip")) {
-					InteractiveItem itemToUnequip = (InteractiveItem) Item
-							.getItem(Player.equippedItems, String.join(" ", cmdArgs));
-					if (itemToUnequip != null) {
-						String itemName = itemToUnequip.getDescription() + " "
-								+ itemToUnequip.getName();
-						itemName = itemName.trim();
-						itemName = itemName.substring(0, 1).toUpperCase() + itemName.substring(1);
-						Player.equippedItems.remove(itemToUnequip);
-						Player.inventory.addItem(itemToUnequip);
-						System.out.println(itemName + " unequipped.");
-					}
 				} else if (cmdAction.equals("inventory")) {
 					Player.inventory.printAll();
-				} else if (cmdAction.equals("equipped")) {
-					if (Player.equippedItems.size() > 0) {
-						System.out.println("You have equipped:");
-						for (Item i : Player.equippedItems) {
-							System.out.print("\t");
-							i.printItem();
-						}
-					} else {
-						System.out.println("You have no items equipped.");
-					}
 				} else if (cmdAction.equals("drop")) {
 					InteractiveItem itemToDrop = Player.inventory
 							.getItem(String.join(" ", cmdArgs));
@@ -183,9 +141,13 @@ public class Game {
 						String itemName = itemToDrop.getDescription() + " " + itemToDrop.getName();
 						itemName = itemName.trim();
 						itemName = itemName.substring(0, 1).toUpperCase() + itemName.substring(1);
-						Player.inventory.removeItem(itemToDrop);
-						currentRoom.addItem(itemToDrop);
-						System.out.println(itemName + " dropped.");
+						if (itemToDrop.isMoveable()) {
+							Player.inventory.removeItem(itemToDrop);
+							currentRoom.addItem(itemToDrop);
+							System.out.println(itemName + " dropped.");
+						} else {
+							System.out.println("You cannot drop the " + itemName.toLowerCase());
+						}
 					}
 				} else if (cmdAction.equals("quit")) {
 					break mainloop;

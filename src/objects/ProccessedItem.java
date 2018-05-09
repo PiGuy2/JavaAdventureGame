@@ -3,6 +3,10 @@ package objects;
 import callableItems.CallableItemDescription;
 import callableItems.CallableItemFunction;
 
+/**
+ * @author Robby
+ *
+ */
 public class ProccessedItem extends InteractiveItem {
 	private CallableItemFunction func;
 	private CallableItemDescription desc = null;
