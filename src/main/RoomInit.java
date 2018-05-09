@@ -6,8 +6,10 @@ package main;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import callableItems.MapProcessor;
 import callableItems.PrizeBoxFunction;
 import objects.BackgroundItem;
+import objects.Card;
 import objects.InteractiveItem;
 import objects.ProccessedItem;
 import objects.Room;
@@ -45,19 +47,19 @@ public class RoomInit {
 		// Arrays.asList(new InteractiveItem("item", "description")));
 		// ArrayList<BackgroundItem> ---BackgroundItems = new ArrayList<>(
 		// Arrays.asList(new BackgroundItem("item", "description")));
-		// Room roomName = new Room("---", "description", "extended description",
-		// roomNameInteractiveItems, roomNameBackgroundItems);
+		// Room --- = new Room("name", "description", "extended description",
+		// ---InteractiveItems, ---BackgroundItems);
 
-		ArrayList<InteractiveItem> ElevensRoomInteractiveItems = new ArrayList<>(
+		ArrayList<InteractiveItem> elevensRoomInteractiveItems = new ArrayList<>(
 				Arrays.asList(new InteractiveItem("table", "round", false),
 						new InteractiveItem("chair", "small", false),
 						new InteractiveItem("case", "trophey", false)));
-		ArrayList<BackgroundItem> ElevensRoomBackgroundItems = new ArrayList<>(
+		ArrayList<BackgroundItem> elevensRoomBackgroundItems = new ArrayList<>(
 				Arrays.asList(new BackgroundItem("painting", "stupid")));
-		Room ElevensRoom = new Room("Elevens Room", "small", "The blank room",
-				ElevensRoomInteractiveItems, ElevensRoomBackgroundItems);
+		Room elevensRoom = new Room("Elevens Room", "small", "The blank room",
+				elevensRoomInteractiveItems, elevensRoomBackgroundItems);
 
-		PrizeBoxFunction PBF = new PrizeBoxFunction();
+		PrizeBoxFunction PBF = new PrizeBoxFunction(new Card("Ace", "Spades"));
 		ArrayList<InteractiveItem> slotMachineRoomInteractiveItems = new ArrayList<>(
 				Arrays.asList(new ProccessedItem("box", PBF, PBF),
 						new InteractiveItem("slot machine", "large", false)));
@@ -70,13 +72,56 @@ public class RoomInit {
 		ArrayList<InteractiveItem> blackJackInteractiveItems = new ArrayList<>(Arrays.asList(
 				new InteractiveItem("table", "Blackjack"), new InteractiveItem("chair", "small"),
 				new InteractiveItem("chest", "reward"), new InteractiveItem("Ace of Clubs")));
-		ArrayList<BackgroundItem> blackJackBackgroundItems = new ArrayList<>(
-				Arrays.asList(new BackgroundItem("item", "description")));
-		Room BlackJack = new Room("Blackjack Room", "A cute lil", blackJackInteractiveItems,
+		ArrayList<BackgroundItem> blackJackBackgroundItems = new ArrayList<>(Arrays.asList());
+		Room blackJackRoom = new Room("Blackjack Room", "", blackJackInteractiveItems,
 				blackJackBackgroundItems);
 
-		ElevensRoom.setDirection("n", slotMachineRoom);
+		PrizeBoxFunction PCF = new PrizeBoxFunction(new Card("Ace", "Clubs"));
+		ArrayList<InteractiveItem> pokerRoomInteractiveItems = new ArrayList<>(
+				Arrays.asList(new ProccessedItem("crate", PCF, PCF)));
+		ArrayList<BackgroundItem> pokerRoomBackgroundItems = new ArrayList<>(
+				Arrays.asList(new BackgroundItem("table", "poker")));
+		Room pokerRoom = new Room("Poker Room", "", "A room with a poker table.",
+				pokerRoomInteractiveItems, pokerRoomBackgroundItems);
 
-		return ElevensRoom; // starting room
+		PrizeBoxFunction PTF = new PrizeBoxFunction(new Card("Ace", "Hearts"));
+		ArrayList<InteractiveItem> mainAreaInteractiveItems = new ArrayList<>(
+				Arrays.asList(new ProccessedItem("box", PTF, PTF),
+						new ProccessedItem("map", "detailed and descriptive", new MapProcessor())));
+		ArrayList<BackgroundItem> mainAreaBackgroundItems = new ArrayList<>(
+				Arrays.asList(new BackgroundItem("table", "large"), new BackgroundItem("bar")));
+		Room mainArea = new Room("Room", "Main", "The large central room of the casino.",
+				mainAreaInteractiveItems, mainAreaBackgroundItems);
+
+		Room entrance = new Room("Entrance", "", "The entrance of the casino.");
+
+		Room southOutside = new Room("grassy area", "", "A section of grass out in the sun.");
+		Room southEastOuside = new Room("grassy area", "", "A section of grass out in the sun.");
+		Room eastOutside = new Room("grassy area", "", "A section of grass out in the sun.");
+		Room northEastOuside = new Room("grassy area", "", "A section of grass out in the sun.");
+
+		Room backOutside = new Room("grassy area", "", "A section of grass behind the casino.");
+		Room backRoom = new Room("room", "back", "A back room of the casino.");
+
+		Room closet = new Room("closet", "dirty", "A back room of the casino.");
+		Room secretRoom = new Room("room", "secret", "A secret room in the casino.");
+
+		mainArea.setDirection("ne", elevensRoom);
+		mainArea.setDirection("nw", slotMachineRoom);
+		mainArea.setDirection("sw", blackJackRoom);
+		mainArea.setDirection("e", pokerRoom);
+		mainArea.setDirection("s", entrance);
+
+		southOutside.setCardinalDirections(entrance, southEastOuside, southOutside, southOutside);
+		southEastOuside.setCardinalDirections(eastOutside, southEastOuside, southEastOuside,
+				southOutside);
+		eastOutside.setCardinalDirections(northEastOuside, eastOutside, southEastOuside,
+				southEastOuside);
+		northEastOuside.setCardinalDirections(northEastOuside, northEastOuside, eastOutside,
+				backOutside);
+		backOutside.setCardinalDirections(backOutside, northEastOuside, backRoom, backOutside);
+		closet.setCardinalDirections(closet, secretRoom, closet, backRoom);
+
+		return mainArea; // starting room
 	}
 }

@@ -1,7 +1,7 @@
 package callableItems;
 
 import character.Player;
-import objects.InteractiveItem;
+import objects.Card;
 
 /**
  * @author Tim
@@ -10,16 +10,20 @@ import objects.InteractiveItem;
  */
 
 public class PrizeBoxFunction implements CallableItemFunction, CallableItemDescription {
-	private boolean hasJoker = false;
+	private Card card;
+
+	public PrizeBoxFunction (Card c) {
+		card = c;
+	}
 
 	@Override
 	public void call (String [] args) {
 		for (String i : args) {
 			if (i.toLowerCase().equals("look") || i.toLowerCase().equals("search")) {
-				if (!hasJoker) {
+				if (card != null) {
 					// getting joker
-					Player.inventory.addItem(new InteractiveItem("Joker", "Red"));
-					hasJoker = true;
+					Player.inventory.addItem(card);
+					card = null;
 				} else {
 					System.out.println("hey wumbo, you already have it XD");
 				}
@@ -31,7 +35,7 @@ public class PrizeBoxFunction implements CallableItemFunction, CallableItemDescr
 
 	@Override
 	public String getDescription () {
-		if (hasJoker) {
+		if (card == null) {
 			return "empty";
 		}
 		return "prize";

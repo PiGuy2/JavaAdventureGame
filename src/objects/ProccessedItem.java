@@ -12,18 +12,18 @@ public class ProccessedItem extends InteractiveItem {
 	private CallableItemDescription desc = null;
 
 	public ProccessedItem (String name, CallableItemDescription d, CallableItemFunction f) {
-		super(name);
+		super(name, false);
 		func = f;
 		desc = d;
 	}
 
 	public ProccessedItem (String name, CallableItemFunction f) {
-		super(name);
+		super(name, false);
 		func = f;
 	}
 
 	public ProccessedItem (String name, String description, CallableItemFunction f) {
-		super(name, description);
+		super(name, description, false);
 		func = f;
 	}
 

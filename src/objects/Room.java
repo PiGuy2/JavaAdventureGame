@@ -13,11 +13,13 @@ import main.CommandParser;
 public class Room {
 	private ArrayList<BackgroundItem> backgroundItems;
 	private String description;
+
 	private HashMap<String, Room> directions;
 
 	private String extDescription;
 
 	private ArrayList<InteractiveItem> itemsInArea;
+
 	private String name;
 
 	/**
@@ -163,6 +165,10 @@ public class Room {
 		itemsInArea.addAll(interactiveItems);
 	}
 
+	public String getDescription () {
+		return description;
+	}
+
 	public HashMap<String, Room> getDirections () {
 		return directions;
 	}
@@ -187,6 +193,10 @@ public class Room {
 
 	public ArrayList<InteractiveItem> getItemsInArea () {
 		return itemsInArea;
+	}
+
+	public String getName () {
+		return name;
 	}
 
 	/**
@@ -258,10 +268,11 @@ public class Room {
 	 * Prints room name and description
 	 */
 	public void printRoom () {
-		if (!description.equals("")) {
-			description += " ";
+		String des = getDescription();
+		if (!des.equals("")) {
+			des += " ";
 		}
-		System.out.println("You are in a " + description + name + ".");
+		System.out.println("You are in a " + des + name + ".");
 	}
 
 	public boolean removeItem (InteractiveItem itemToRemove) {
