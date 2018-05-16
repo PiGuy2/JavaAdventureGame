@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 import callableItems.MapProcessor;
 import callableItems.PrizeBoxFunction;
+import callableItems.SecretTableFunction;
 import objects.BackgroundItem;
 import objects.Card;
 import objects.InteractiveItem;
@@ -93,18 +94,33 @@ public class RoomInit {
 		Room mainArea = new Room("Room", "Main", "The large central room of the casino.",
 				mainAreaInteractiveItems, mainAreaBackgroundItems);
 
-		Room entrance = new Room("Entrance", "", "The entrance of the casino.");
+		Room entrance = new Room("Entrance", "",
+				"The entrance of the Mickey Mouse Gambling House.");
 
 		Room southOutside = new Room("grassy area", "", "A section of grass out in the sun.");
 		Room southEastOuside = new Room("grassy area", "", "A section of grass out in the sun.");
 		Room eastOutside = new Room("grassy area", "", "A section of grass out in the sun.");
 		Room northEastOuside = new Room("grassy area", "", "A section of grass out in the sun.");
 
-		Room backOutside = new Room("grassy area", "", "A section of grass behind the casino.");
+		ArrayList<InteractiveItem> backOutsideInteractiveItems = new ArrayList<>(Arrays.asList(
+				new ProccessedItem("can", "trash",
+						new PrizeBoxFunction(new Card("Ace", "Diamonds"))),
+				new InteractiveItem("dumpster", "large"), new InteractiveItem("can", "garbage"),
+				new InteractiveItem("can", "waste"), new InteractiveItem("can", "rubbish"),
+				new InteractiveItem("can", "recycling")));
+		ArrayList<BackgroundItem> backOutsideBackgroundItems = new ArrayList<>(
+				Arrays.asList(new BackgroundItem("grass", "boring")));
+		Room backOutside = new Room("grassy area", "", "A section of grass behind the casino.",
+				backOutsideInteractiveItems, backOutsideBackgroundItems);
+
 		Room backRoom = new Room("room", "back", "A back room of the casino.");
 
 		Room closet = new Room("closet", "dirty", "A back room of the casino.");
-		Room secretRoom = new Room("room", "secret", "A secret room in the casino.");
+
+		ArrayList<InteractiveItem> secretRoomInteractiveItems = new ArrayList<>(Arrays
+				.asList(new ProccessedItem("table", "description", new SecretTableFunction())));
+		Room secretRoom = new Room("room", "secret", "A secret room in the casino.",
+				secretRoomInteractiveItems);
 
 		mainArea.setDirection("ne", elevensRoom);
 		mainArea.setDirection("nw", slotMachineRoom);
