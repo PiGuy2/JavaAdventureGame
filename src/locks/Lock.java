@@ -1,5 +1,9 @@
 package locks;
 
+/**
+ * @author Robby
+ *
+ */
 public class Lock {
 	protected String lockedMessage;
 

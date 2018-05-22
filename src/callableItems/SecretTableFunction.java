@@ -1,15 +1,19 @@
 package callableItems;
 
+import java.util.ArrayList;
+
 import character.Player;
 import objects.Card;
 import objects.InteractiveItem;
+
+//l box;sw;l joker;ne;nw;l box;se;ne;l case;sw;e; l crate;w;s;s;e;n;n;w;l can;s;e;e;put table
 
 /**
  * @author Robby
  * @author Tim
  */
 public class SecretTableFunction implements CallableItemFunction {
-	Card [] [] tableCards = new Card [2] [5]; // red, black
+	Card [] [] tableCards = new Card [2] [3]; // red, black
 
 	@Override
 	public void call (String [] args) {
@@ -43,34 +47,97 @@ public class SecretTableFunction implements CallableItemFunction {
 				c++;
 			}
 
-			for (InteractiveItem i : Player.inventory.getItems()) {
+			ArrayList<InteractiveItem> ivt = Player.inventory.getItems();
+			ivtLoop: while (ivt.size() > 0) {
+				System.out.println("---");
+				InteractiveItem i = ivt.remove(0);
+				if (i.getClass() != Card.class) {
+					continue;
+				}
 				for (Card card : cards) {
-					System.out.println(i.toString() + " : " + card.toString());
+					System.out.println(i + ", " + card);
 					if (i.equals(card)) {
 						Card add = (Card) i;
-						int indx = add.getDescription().equals("Red") ? 1 : 0;
-						if (add.getName().equals("Joker")) {
-							tableCards[indx][0] = add;
-							Player.inventory.removeItem(add);
-							break;
-						}
-						for (int j = 0; j < tableCards[indx].length - 1; j++) {
-							if (tableCards[indx][j] == null) {
-								tableCards[indx][j] = add;
-								Player.inventory.removeItem(add);
+						int indx = -2;
+						switch (add.getDescription()) {
+							case "Black":
+							case "Spades":
+							case "Clubs":
+								indx = 0;
 								break;
+							case "Red":
+							case "Diamonds":
+							case "Hearts":
+								indx = 1;
+								break;
+							default:
+								indx = -1;
+						}
+						if (add.getName().equals("Joker")) {
+							// System.out.println("Joker");
+							// for (Card [] a : tableCards) {
+							// for (Card b : a) {
+							// System.out.print(b + ", ");
+							// }
+							// System.out.println();
+							// }
+							tableCards[indx][0] = add;
+							// System.out.println(indx + ", " + 0);
+							// for (Card [] a : tableCards) {
+							// for (Card b : a) {
+							// System.out.print(b + ", ");
+							// }
+							// System.out.println();
+							// }
+							// System.out.println("\tMatch");
+							Player.inventory.removeItem(add);
+							continue ivtLoop;
+						}
+						for (int j = 1; j < tableCards[indx].length; j++) {
+							if (tableCards[indx][j] == null) {
+								// for (Card [] a : tableCards) {
+								// for (Card b : a) {
+								// System.out.print(b + ", ");
+								// }
+								// System.out.println();
+								// }
+								tableCards[indx][j] = add;
+								// System.out.println(indx + ", " + j);
+								// for (Card [] a : tableCards) {
+								// for (Card b : a) {
+								// System.out.print(b + ", ");
+								// }
+								// System.out.println();
+								// }
+								// System.out.println("\tMatch");
+								Player.inventory.removeItem(add);
+								continue ivtLoop;
 							}
 						}
 					}
 				}
+				System.out.println("error");
 			}
 		}
+		for (Card [] i : tableCards) {
+			for (Card j : i) {
+				if (j == null) {
+					return;
+				}
+			}
+		}
+
+		System.out.println("\n-------------------------\n");
+		System.out.println(this);
+		System.out.println("\n-------------------------\n");
+		System.out.println("You win!");
+		System.out.println("\n-------------------------");
 	}
 
 	@Override
 	public String toString () {
 		String r = "";
-		Card [] [] tc = new Card [5] [2];
+		Card [] [] tc = new Card [tableCards[0].length] [tableCards.length];
 		for (int i = 0; i < tableCards.length; i++) {
 			for (int j = 0; j < tableCards[0].length; j++) {
 				tc[j][i] = tableCards[i][j];

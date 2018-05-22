@@ -19,7 +19,6 @@ import objects.Room;
  * @author Robby
  * @author Owen
  * @author Tim
- *
  */
 public class RoomInit {
 	public static Room makeRooms () {
@@ -53,8 +52,8 @@ public class RoomInit {
 
 		ArrayList<InteractiveItem> elevensRoomInteractiveItems = new ArrayList<>(
 				Arrays.asList(new InteractiveItem("table", "round", false),
-						new InteractiveItem("chair", "small", false),
-						new InteractiveItem("case", "trophey", false)));
+						new InteractiveItem("chair", "small", false), new ProccessedItem("case",
+								"trophey", new PrizeBoxFunction(new Card("Joker", "Black")))));
 		ArrayList<BackgroundItem> elevensRoomBackgroundItems = new ArrayList<>(
 				Arrays.asList(new BackgroundItem("painting", "stupid")));
 		Room elevensRoom = new Room("Elevens Room", "small", "The blank room",
@@ -72,7 +71,8 @@ public class RoomInit {
 
 		ArrayList<InteractiveItem> blackJackInteractiveItems = new ArrayList<>(Arrays.asList(
 				new InteractiveItem("table", "Blackjack"), new InteractiveItem("chair", "small"),
-				new InteractiveItem("chest", "reward"), new InteractiveItem("Ace of Clubs")));
+				new InteractiveItem("chest", "reward"), new ProccessedItem("Joker", "Red",
+						new PrizeBoxFunction(new Card("Joker", "Red")))));
 		ArrayList<BackgroundItem> blackJackBackgroundItems = new ArrayList<>(Arrays.asList());
 		Room blackJackRoom = new Room("Blackjack Room", "", blackJackInteractiveItems,
 				blackJackBackgroundItems);

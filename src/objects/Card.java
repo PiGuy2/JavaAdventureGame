@@ -1,5 +1,9 @@
 package objects;
 
+/**
+ * @author Robby
+ *
+ */
 public class Card extends InteractiveItem {
 	public Card (String name) {
 		super(name, false);

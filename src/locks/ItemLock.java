@@ -9,7 +9,6 @@ import objects.InteractiveItem;
  *
  * @author Robby
  */
-
 public class ItemLock extends Lock {
 	private InteractiveItem unlockItem;
 
@@ -18,7 +17,7 @@ public class ItemLock extends Lock {
 	 * from being performed before the lock is unlocked. An ItemLock is unlocked by
 	 * the presence of a specific item in the {@link character.Player Player}'s
 	 * {@link character.Inventory Inventory}
-	 * 
+	 *
 	 * @param unlockItem
 	 *            is the item that must be present in the player's inventory to
 	 *            unlock the lock.

@@ -19,7 +19,8 @@ public class PrizeBoxFunction implements CallableItemFunction, CallableItemDescr
 	@Override
 	public void call (String [] args) {
 		for (String i : args) {
-			if (i.toLowerCase().equals("look") || i.toLowerCase().equals("search")) {
+			if (i.toLowerCase().equals("look") || i.toLowerCase().equals("search")
+					|| i.toLowerCase().equals("take")) {
 				if (card != null) {
 					// getting joker
 					Player.inventory.addItem(card);

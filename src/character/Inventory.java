@@ -46,8 +46,9 @@ public class Inventory {
 		return (InteractiveItem) Item.getItem(itemsToSearch, param);
 	}
 
+	@SuppressWarnings("unchecked")
 	public ArrayList<InteractiveItem> getItems () {
-		return items;
+		return (ArrayList<InteractiveItem>) items.clone();
 	}
 
 	public void printAll () {
